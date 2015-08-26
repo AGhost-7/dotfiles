@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+cat <<SCRIPT
+
+# I want to modify the path to include node_modules/.bin
+P="\$(pwd)/node_modules/.bin"
+IFS=':' read -ra ADDR <<< "\$PATH"
+for i in "\${ADDR[@]}"; do
+	if [[ \$i != *"node_modules/.bin"* ]]; then
+		P="\$P:\$i"
+	fi
+done
+
+export PATH="\$P"
+SCRIPT
+
+

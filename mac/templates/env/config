@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+output="
+export DB_NAME=isight_$1
+export AUDIT_DB_NAME=${1}_audit
+# Debug everything
+export DEBUG=*
+# enable ACL debugging... you'll need to use seneca-perm version 0.6.0
+export ACL_DEBUG=1
+export APP_CONFIG=$1
+export APP_CONFIG_PATH=\"node_modules/$2\"
+
+nvm use 0.10.38 > /dev/null
+"
+
+echo "$output" "$(./node)"
+
+

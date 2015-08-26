@@ -1,0 +1,13 @@
+Host bitbucket.org
+	HostName bitbucket.org
+	User git
+	IdentityFile ~/.ssh/bitbucket
+Host github.com-CExJBoudreau
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/github_isight
+Host github.com-AGhost-7
+	Hostname github.com
+	User git
+	IdentityFile ~/.ssh/github_ghost
+
