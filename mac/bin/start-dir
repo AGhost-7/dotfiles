@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+case $1 in
+"set")
+	p="$(cd $2;pwd)"
+	echo "$p" > ~/.start_dir_bash  
+	;;
+"get")
+	echo `cat ~/.start_dir_bash`
+	;;
+"goto")
+	dir=`cat ~/.start_dir_bash`
+	cd "$dir"
+	;;
+esac

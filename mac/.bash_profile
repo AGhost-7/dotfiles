@@ -4,7 +4,7 @@ vim(){
 
 . /usr/local/opt/autoenv/activate.sh
 
-export PATH="$PATH:~/bin"
+export PATH="$PATH:~/envfiles/mac/bin:~/envfiles/common/bin"
 
 export NVM_PATH=~/.nvm
 export NODE_ENV=development
