@@ -109,3 +109,6 @@ set clipboard=unnamed
 let g:ctrlp_custom_ignore = {
 	\ 'dir': '\v[\/](node_modules|\.git)$'
 	\ }
+
+" Automatically close the file pane when I opend a file
+let NERDTreeQuitOnOpen=1
