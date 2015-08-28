@@ -6,7 +6,9 @@
 # vim <3
 apt-get install vim -y
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-cp resource/vimrc ~/.vimrc
+#cp resource/vimrc ~/.vimrc
+# pwd is the directory of the file which is sourcing the script
+ln -s `pwd`/../.vimrc ~/.vimrc
 vim +PluginInstall +qall
 
 # meh, prob a good idea
