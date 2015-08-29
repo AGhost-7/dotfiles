@@ -3,13 +3,11 @@
 #
 #    ~~ Installer Script ~~
 #
-#   n.b. This needs to be run as sudo to work propely.
-#
-#   note to self: Script is for Elementary OS Freya  which is based on Ubuntu 
+#   note to self: Script is for Elementary OS Freya  which is based on Ubuntu
 #		14.04 LTS.
 #
-#	How to run: `sudo ./installer.sh`
-#	Even better: `sudo ./installer.sh > install.log && echo 'installation complete'`
+#		How to run:
+# 	sudo -u jonathan ./installer.sh | tee install.log && echo 'installation complete'
 #
 
 if [[ $1 == "" ]]; then
@@ -44,6 +42,3 @@ cp resource/bashrc ~/.bashrc
 . lib/compilers.sh
 
 . lib/ui.sh elemetary freya
-
-
-
