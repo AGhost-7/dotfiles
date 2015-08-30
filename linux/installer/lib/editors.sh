@@ -3,7 +3,9 @@
 #	Install source code editors
 #
 
-# vim <3
+# -------
+# Vim <3
+# -------
 
 # Since I need to have "+ruby" compilation options in Vim of installed, I'm
 # to have to compile the thing from source.
@@ -41,14 +43,21 @@ cd ~/.vim/bundle/YouCompleteMe
 # TODO: Add ensime to installer
 sudo gem install websocket-eventmachine-client
 
-# TODO: Add Tern to installer.
+# Set up the tern completion/static analysis engine
+ln -s `pwd`/../../common/.tern-config ~/.tern-config
+cd ~/.vim/bundle/tern_for_vim
+npm install
 
-# meh, prob a good idea
+# -----
+# Atom
+# -----
 wget -O /tmp/atom.deb \
 		https://github.com/atom/atom/releases/download/v1.0.2/atom-amd64.deb
 dpkg -i /tmp/atom.deb
 
-# install intellij
+# ---------
+# Intellij
+# ---------
 wget -O /tmp/intellij.tar.gz \
  		https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
 tar -C /tmp -zx -f /tmp/intellij.tar.gz
