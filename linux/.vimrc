@@ -25,7 +25,8 @@ Plugin 'kien/ctrlp.vim'
 
 " Adds the ability to close all except the current buffer
 Plugin 'BufOnly.vim'
-
+Plugin 'bling/vim-airline'
+"Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " -----------------
 " Language support
