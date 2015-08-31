@@ -25,7 +25,7 @@ Plugin 'kien/ctrlp.vim'
 
 " Adds the ability to close all except the current buffer
 Plugin 'BufOnly.vim'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
 "Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " -----------------
@@ -71,7 +71,7 @@ set ruler
 set incsearch
 
 "show row numbers
-set nu
+set relativenumber
 
 " Enable mouse control
 set mouse=a
@@ -95,3 +95,10 @@ set clipboard=unnamed
 let g:ctrlp_custom_ignore = {
 	\ 'dir': '\v[\/](node_modules|\.git)$'
 	\ }
+
+" Enable the powerline binding for the status line, needs to be installed
+" using pip
+set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+
+" Always show statusline
+set laststatus=2

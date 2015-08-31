@@ -24,13 +24,14 @@ git clone https://github.com/vim/vim.git /tmp/vim
 cd /tmp/vim
 # I need Python support for YouCompleteMe, and Ruby support for Ensime.
 ./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp \
-            --enable-pythoninterp \
-            --with-python-config-dir=/usr/lib/python2.7/config \
-            --enable-perlinterp \
-            --enable-luainterp \
-            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+	--enable-multibyte \
+	--enable-rubyinterp \
+	--enable-pythoninterp \
+	--with-python-config-dir=/usr/lib/python2.7/config \
+	--enable-perlinterp \
+	--enable-luainterp \
+	--enable-gui=gtk2 --enable-cscope --prefix=/usr
+
 sudo make install
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -52,14 +53,14 @@ npm install
 # Atom
 # -----
 wget -O /tmp/atom.deb \
-		https://github.com/atom/atom/releases/download/v1.0.2/atom-amd64.deb
+	https://github.com/atom/atom/releases/download/v1.0.2/atom-amd64.deb
 dpkg -i /tmp/atom.deb
 
 # ---------
 # Intellij
 # ---------
 wget -O /tmp/intellij.tar.gz \
- 		https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
+ 	https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
 tar -C /tmp -zx -f /tmp/intellij.tar.gz
 mv idea* idea
 /tmp/idea/bin/./idea
