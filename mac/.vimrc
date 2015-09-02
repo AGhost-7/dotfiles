@@ -75,7 +75,7 @@ match Error /\%101v.\+/
 set ruler
 
 " Display the row numbers (line number)
-set nu
+set relativenumber
 
 " Will search the file as you type your query
 set incsearch
@@ -112,3 +112,9 @@ let g:ctrlp_custom_ignore = {
 
 " Automatically close the file pane when I opend a file
 let NERDTreeQuitOnOpen=1
+
+" Load up powerline
+set rtp +=~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+set laststatus=2
+
+set t_Co=256
