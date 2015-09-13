@@ -123,7 +123,8 @@ esac
 # Tmux
 #-----
 
-sudo apt-get install tmux
+# xclip is needed for yank plugin
+sudo apt-get install tmux xclip
 ln -s `pwd`/.tmux.conf ~/.tmux.conf
 
 # Default status bar at bottom of tmux is pretty bland and basic.
@@ -135,6 +136,10 @@ mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
 fc-cache -vf ~/.fonts
 mkdir -p ~/.config/fontconfig/conf.d/ && \
 	mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+
+# now install tmux-yank
+mkdir ~/.tmux
+git clone https://github.com/tmux-plugins/tmux-yank ~/.tmux/tmux-yank
 
 # -----------------
 # Install Databases
