@@ -37,6 +37,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'AGhost-7/vim-nwscript'
 Plugin 'wting/rust.vim'
 Plugin 'VimClojure'
+Plugin 'ensime/ensime-vim' " scala plugin
 
 " Syntax checker, run `npm install -g jshint` to install js support.
 Plugin 'scrooloose/syntastic'

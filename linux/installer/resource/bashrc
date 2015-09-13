@@ -1,3 +1,0 @@
-export PATH="$PATH:~/bin"
-# If not specified, I want
-export PGDATABASE=template1

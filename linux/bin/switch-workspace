@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+echo "1: $1" >> work.log
+echo "2: $2" >> work.log
+work=`wmctrl -d` | grep '*' | grep -o '^[0-9]*'
+if [[ $1 == "left" ]]; then
+	wmctrl -s $((work - 1))
+elif [[ $1 == "right" ]]; then
+	wmctrl -s $((work + 1))
+fi
