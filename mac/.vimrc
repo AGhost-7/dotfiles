@@ -80,9 +80,6 @@ set relativenumber
 " Will search the file as you type your query
 set incsearch
 
-" Enable mouse support!
-set mouse=a
-
 " gonna want that nice color.
 colorscheme monokai
 
@@ -118,3 +115,14 @@ set rtp +=~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 set laststatus=2
 
 set t_Co=256
+
+" Enable mouse support!
+set mouse=a
+
+" Enable more advanced mouse features.
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
+
+
