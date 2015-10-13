@@ -26,7 +26,9 @@ export NODE_ENV=development
 #https://github.com/rjrodger/seneca-perm/blob/master/lib/ACLMicroservicesBuilder.js
 export ACL_DEBUG=1
 if [[ \$1 == \"run\" ]]; then
-	node server.js \"\$2\"
+	# If not specified, run on port 8000
+	[[ \$2 == \"\" ]] && port=8000 || port=\"\$2\"
+	node server.js \"\$port\"
 else
 	make \$1
 fi

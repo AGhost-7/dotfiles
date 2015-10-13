@@ -79,6 +79,9 @@ set ruler
 " Display the row numbers (line number)
 set relativenumber
 
+" Add a bar on the side which delimits 100 characters.
+set colorcolumn=100
+
 " Will search the file as you type your query
 set incsearch
 
