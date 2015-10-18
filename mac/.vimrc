@@ -52,6 +52,8 @@ Plugin 'BufOnly.vim'
 " Type inference engine, will enhance autocompletion, etc.
 Plugin 'marijnh/tern_for_vim'
 
+Plugin 'kchmck/vim-coffee-script'
+
 call vundle#end()            " vundle required
 filetype plugin indent on    " vundle required
 
@@ -76,6 +78,9 @@ set ruler
 
 " Display the row numbers (line number)
 set relativenumber
+
+" Add a bar on the side which delimits 100 characters.
+set colorcolumn=100
 
 " Will search the file as you type your query
 set incsearch
@@ -108,7 +113,7 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " Automatically close the file pane when I opend a file
-let NERDTreeQuitOnOpen=1
+"let NERDTreeQuitOnOpen=1
 
 " Load up powerline
 set rtp +=~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
@@ -125,4 +130,4 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-
+autocmd FileType javascript let b:syntastic_checkers = findfile('.jscsrc', '.;') != '' ? ['jscs', 'jshint'] : ['jshint']

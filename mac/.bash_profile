@@ -4,7 +4,12 @@ vim(){
 
 . /usr/local/opt/autoenv/activate.sh
 
-export PATH="$PATH:~/envfiles/mac/bin:~/envfiles/common/bin"
+export PATH="$PATH:~/envfiles/mac/bin:~/envfiles/common/bin:~/bin:"
+
+# Powerline's powerline-config script needs to be on the PATH
+# for it to work in tmux
+export PATH="$PATH:~/Library/Python/2.7/bin"
+
 export LC_ALL="en_US.UTF-8"
 export NVM_PATH=~/.nvm
 export NODE_ENV=development

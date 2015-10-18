@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+read -p "project name: " name
+
+read -p "database name (defaults to \"$name\"): " db
+if [[ $db == "" ]]; then
+	db="$name"
+fi
+ 
+read -p "audit database name (defaults to \"${name}_audit\"): " db_audit
+if [[ $db_audit == "" ]]; then
+	db_audit="${name}_audit"
+fi
+
+read -p "elastic search index name (defaults to \"${name}\"): " es
+if [[ $es == "" ]]; then
+	es="$name"
+fi
+
+echo "#!/usr/bin/env bash
+export APP_CONFIG_PATH=\$PWD
+export DB_NAME=$db
+export AUDIT_DB_NAME=$db_audit
+export ES_INDEX=$es
+export NODE_ENV=development
+# To activate the ACL debug prints
+#https://github.com/rjrodger/seneca-perm/blob/master/lib/ACLMicroservicesBuilder.js
+export ACL_DEBUG=1
+if [[ \$1 == \"run\" ]]; then
+	# If not specified, run on port 8000
+	[[ \$2 == \"\" ]] && port=8000 || port=\"\$2\"
+	node server.js \"\$port\"
+else
+	make \$1
+fi
+" > "$PWD/dev"
+chmod +x dev
+
+
