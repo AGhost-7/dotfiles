@@ -15,6 +15,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 " Directory search tool
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" Man pages in vim
 Plugin 'bruno-/vim-man'
 
 " Autocomplete
@@ -48,6 +50,8 @@ Plugin 'pangloss/vim-javascript'
 " Type inference engine, will enhance autocompletion, etc.
 Plugin 'marijnh/tern_for_vim'
 
+" support for react.js inline html
+Plugin 'mxw/vim-jsx'
 
 " -------------------
 " Some color schemes
@@ -82,7 +86,9 @@ set t_Co=256
 colorscheme monokai
 
 " Make it highlight red when I go beyond 80 lines.
-match Error /\%91v.\+/
+"match Error /\%91v.\+/
+" Add a bar which marks the 80th character
+set colorcolumn=80
 
 " Add a alias for NERDTree
 "noreabbrev tree NERDTree
@@ -90,7 +96,7 @@ command T NERDTree
 command Bd bp|bd #
 
 " Send to system clipboard by default
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " CtrlP ignore node_modules by default to make searching faster
 let g:ctrlp_custom_ignore = {
