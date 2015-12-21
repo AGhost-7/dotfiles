@@ -72,8 +72,6 @@ set smartindent
 " don't convert tabs to spaces!
 set noexpandtab
 
-set ruler
-
 " Search as you type the query
 set incsearch
 
