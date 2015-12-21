@@ -10,4 +10,7 @@ export NVM_DIR="/home/jonathan/.nvm"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export TERM=screen-256color
+export BROWSER=chrome
 
+alias ls='ls --color=auto'
+alias snip='xclip -selection clipboard'

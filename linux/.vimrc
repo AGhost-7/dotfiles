@@ -38,6 +38,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'AGhost-7/vim-nwscript'
 Plugin 'wting/rust.vim'
+Plugin 'racer-rust/vim-racer'
 Plugin 'VimClojure'
 Plugin 'ensime/ensime-vim' " scala plugin
 
@@ -109,3 +110,6 @@ set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
 " Always show statusline
 set laststatus=2
+
+let g:racer_cmd = "/home/jonathan/.multirust/toolchains/beta/cargo/bin/racer"
+let $RUST_SRC_PATH = "/home/jonathan/.multirust/toolchains/beta/cargo/registry/src/github.com-0a35038f75765ae4"

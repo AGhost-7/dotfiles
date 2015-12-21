@@ -46,6 +46,9 @@ sudo apt-get install dconf-editor -y
 sudo apt-get install guake -y
 ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
+# Command line clipboard utility
+sudo apt-get install xclip -y
+
 # ---------
 # Shortcuts
 # ---------
@@ -123,7 +126,9 @@ esac
 # Tmux
 #-----
 
-# xclip is needed for yank plugin
+# get latest version to prevent random logs on startup.
+sudo add-apt-repository -y ppa:pi-rho/dev
+sudo apt-get update
 sudo apt-get install tmux xclip
 ln -s `pwd`/.tmux.conf ~/.tmux.conf
 
@@ -298,8 +303,8 @@ npm install
 # ---------
 # Intellij
 # ---------
-wget -O /tmp/intellij.tar.gz \
- 	https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
-tar -C /tmp -zx -f /tmp/intellij.tar.gz
-mv idea* idea
-/tmp/idea/bin/./idea
+#wget -O /tmp/intellij.tar.gz \
+# 	https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
+#tar -C /tmp -zx -f /tmp/intellij.tar.gz
+#mv idea* idea
+#/tmp/idea/bin/./idea
