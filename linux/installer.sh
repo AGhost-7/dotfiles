@@ -250,55 +250,51 @@ bash /tmp/elementary-dropbox/install.sh
 # -------
 # Vim <3
 # -------
+# Add ppa and install neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+sudo apt-get install neovim -y
 
-# Since I need to have "+ruby" compilation options in Vim of installed, I'm
-# to have to compile the thing from source.
+# Neovim uses XDG spec, so I need to export the home directory to an env variable
+echo '
+export XDG_CONFIG_PATH="$HOME/.config"' >> /home/vagrant/.bashrc
 
-# First, remove current vim since it usually comes bundled with Ubuntu distros.
-apt-get remove vim vim-runtime gvim
+# Tern and YCM will need python support enabled
+sudo apt-get install python-pip python-dev
+sudo pip install neovim
 
-# Couple of dependencies for compiling this one, especially since I want some
-# of the extras enabled.
-sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
-    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-    ruby-dev cmake
+# Link the init.vim file
+mkdir -p ~/.config/nvim
+ln -s `pwd`/init.vim ~/.config/nvim/init.vim
 
-git clone https://github.com/vim/vim.git /tmp/vim
-cd /tmp/vim
-# I need Python support for YouCompleteMe, and Ruby support for Ensime.
-./configure --with-features=huge \
-	--enable-multibyte \
-	--enable-rubyinterp \
-	--enable-pythoninterp \
-	--with-python-config-dir=/usr/lib/python2.7/config \
-	--enable-perlinterp \
-	--enable-luainterp \
-	--enable-gui=gtk2 --enable-cscope --prefix=/usr
+# Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo make install
+# Now install the dependencies
+nvim +PlugInstall +qall
 
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-#cp resource/vimrc ~/.vimrc
-# pwd is the directory of the file which is sourcing the script
-ln -s `pwd`/.vimrc ~/.vimrc
-vim +PluginInstall +qall
-cd ~/.vim/bundle/YouCompleteMe
-./install.py
-# TODO: Add ensime to installer
-sudo gem install websocket-eventmachine-client
+# Install linters globally so the plugins can use them
+sudo npm install -g jscs jshint
 
-# Set up the tern completion/static analysis engine
+# Install dependencies for Tern
+pushd ~/.config/nvim/plugged/tern_for_vim && \
+	npm install && \
+	popd
+
+# Link the tern config file to synchronization project
 ln -s `pwd`/../../common/.tern-config ~/.tern-config
-cd ~/.vim/bundle/tern_for_vim
-npm install
 
-# -----
-# Atom
-# -----
-#wget -O /tmp/atom.deb \
-#	https://github.com/atom/atom/releases/download/v1.0.2/atom-amd64.deb
-#dpkg -i /tmp/atom.deb
+# YouCompleteMe needs cmake to compile
+sudo apt-get install cmake -y
+
+# And now, compile YouCompleteMe
+~/.config/nvim/plugged/YouCompleteMe/install.py
+
+# Install patched fonts for the status line
+git clone https://github.com/powerline/fonts.git /tmp/fonts && \
+	/tmp/fonts/install.sh
+
 
 # ---------
 # Intellij
