@@ -4,7 +4,7 @@ vim(){
 
 . /usr/local/opt/autoenv/activate.sh
 
-export PATH="$PATH:~/envfiles/mac/bin:~/envfiles/common/bin:~/bin:"
+export PATH="$PATH:~/envfiles/mac/bin:~/envfiles/common/bin:~/bin:$HOME/workspaces/parsy/bin"
 
 # Powerline's powerline-config script needs to be on the PATH
 # for it to work in tmux
@@ -21,7 +21,8 @@ start_dir=`cat ~/.start_dir_bash`
 cd "$start_dir"
 
 export CLICOLOR=1
-export PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+export PS1='[\[\e[0;31m\]\u\[\e[0m\]]:\e[0;34m\]\w\[\e[0m\]\n\$ '
+
 #alias ls='ls -Fa'
 test -e ${HOME}/.iterm2_shell_integration.bash && source ${HOME}/.iterm2_shell_integration.bash
 

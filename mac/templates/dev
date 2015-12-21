@@ -25,6 +25,10 @@ export NODE_ENV=development
 # To activate the ACL debug prints
 #https://github.com/rjrodger/seneca-perm/blob/master/lib/ACLMicroservicesBuilder.js
 export ACL_DEBUG=1
+# Platform logging.
+#https://github.com/i-Sight/isight_main_v5_beta/blob/develop/config/index.js#L34
+export SENECA_LOG_ENABLED=1
+export=LOG_LEVEL=debug
 if [[ \$1 == \"run\" ]]; then
 	# If not specified, run on port 8000
 	[[ \$2 == \"\" ]] && port=8000 || port=\"\$2\"
