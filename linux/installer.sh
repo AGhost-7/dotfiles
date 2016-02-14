@@ -56,26 +56,29 @@ sudo apt-get install xclip -y
 # . lib/shortcuts.sh
 
 # Change of workspaces from the command line; used for custom hotcorners/hotkeys
-sudo apt-get install wmctrl -y
+#sudo apt-get install wmctrl -y
 
-keybind-settings(){
-	gsettings $1 org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom$2/ $3 $4
-}
+#keybind-settings(){
+#	gsettings $1 org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom$2/ $3 $4
+#}
+#
+#keyboard-shortcut(){
+#	i=$1
+#	keybind-settings set $i name $2
+#	keybind-settings set $i binding $3
+#	keybind-settings set $i command $4
+#}
+#
+#keyboard-shortcut 0 'google-chrome-stable' '<Primary><Alt>w' 'google-chrome-stable'
+#keyboard-shortcut 1 'pantheon-terminal' '<Primary><Alt>t' 'pantheon-terminal'
+#keyboard-shortcut 2 'pantheon-files' '<Primary><Alt>f' 'pantheon-files'
+#
+## Setup switch-workspace for hotcorners
+#sudo apt-get install wmctrl
+#ln -s `pwd`/bin/switch-workspace ~/bin/switch-workspace
 
-keyboard-shortcut(){
-	i=$1
-	keybind-settings set $i name $2
-	keybind-settings set $i binding $3
-	keybind-settings set $i command $4
-}
-
-keyboard-shortcut 0 'google-chrome-stable' '<Primary><Alt>w' 'google-chrome-stable'
-keyboard-shortcut 1 'pantheon-terminal' '<Primary><Alt>t' 'pantheon-terminal'
-keyboard-shortcut 2 'pantheon-files' '<Primary><Alt>f' 'pantheon-files'
-
-# Setup switch-workspace for hotcorners
-sudo apt-get install wmctrl
-ln -s `pwd`/bin/switch-workspace ~/bin/switch-workspace
+# alt-tab will only work with windows in current workspace (gnome 3)
+dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 
 # ------------------------
 # Setup File Sytem & Links
@@ -93,34 +96,34 @@ ln -s `pwd`/.bashrc ~/.bashrc
 # Setup filesystem first so that dropbox will sync from the hard drive instead of the ssd
 #. lib/fs.sh inspiron
 
-case $computer in
-inspiron)
-	
-	# automount my storage partition
-	sudo mkdir /media/storage
-	sudo cp /etc/fstab /etc/fstab.backup
-	fsDrive=sudo blkid | grep 'dev/sda2' | grep -Eo 'UUID="[A-Za-z0-9-]+"' \
-		| grep -Eo '"[A-Za-z0-9-]+"' | grep -Eo '[A-Za-z0-9-]+'
-	sudo echo "$fsDrive    /media/storage   ext4     defaults   0   0" >> /etc/fstab
-
-	# I still need to mount the drive since I think I'll need to reset before the 
-	# changes to the file take effect.
-	sudo mount -t ext4 /dev/sda2 /media/storage
-
-	# link back stuff on my terabyte drive to my home folder.
-	function relink(){
-		rm -r ~/$1
-		ln -s /media/storage/$1 ~/$1
-	}
-	relink Downloads
-	relink Pictures
-	relink Videos
-	relink Dropbox
-	relink Documents
-	relink Music
-	mkdir workspaces
-;;
-esac
+#case $computer in
+#inspiron)
+#	
+#	# automount my storage partition
+#	sudo mkdir /media/storage
+#	sudo cp /etc/fstab /etc/fstab.backup
+#	fsDrive=sudo blkid | grep 'dev/sda2' | grep -Eo 'UUID="[A-Za-z0-9-]+"' \
+#		| grep -Eo '"[A-Za-z0-9-]+"' | grep -Eo '[A-Za-z0-9-]+'
+#	sudo echo "$fsDrive    /media/storage   ext4     defaults   0   0" >> /etc/fstab
+#
+#	# I still need to mount the drive since I think I'll need to reset before the 
+#	# changes to the file take effect.
+#	sudo mount -t ext4 /dev/sda2 /media/storage
+#
+#	# link back stuff on my terabyte drive to my home folder.
+#	function relink(){
+#		rm -r ~/$1
+#		ln -s /media/storage/$1 ~/$1
+#	}
+#	relink Downloads
+#	relink Pictures
+#	relink Videos
+#	relink Dropbox
+#	relink Documents
+#	relink Music
+#	mkdir workspaces
+#;;
+#esac
 
 # ----
 # Tmux
@@ -150,16 +153,7 @@ git clone https://github.com/tmux-plugins/tmux-yank ~/.tmux/tmux-yank
 # Install Databases
 # -----------------
 
-# I think I'll just install postgres for now..
-#. lib/db.sh postgres
-# Install postgres for the official pg repo to get the latest suported version
-#apt-get install postgresql -y
-sudo echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' \
-	| sudo tee /etc/sources.list.d/pgdg.list
-
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get upgrade
+# Postgresql!
 sudo apt-get install postgresql-9.3 pgadmin3 -y
 
 # add my username to the roles so I don't need to `sudo -u postgres` all the time
@@ -184,39 +178,33 @@ sudo apt-get install openjdk-8-jdk -y
 
 # install sbt for scala
 echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 sudo apt-get update
-# I need to force it since the repo doesn't provide https
-sudo apt-get install sbt -y --force-yes
+sudo apt-get install sbt -y
 
 # Install rust compiler and cargo
-curl -sSf https://static.rust-lang.org/rustup.sh | sh
+#curl -sSf https://static.rust-lang.org/rustup.sh | sh
 
 # install *node* \(^0^)/
-git clone -b v0.12.7-release https://github.com/joyent/node.git /tmp/node
-cd /tmp/node && ./configure && make && sudo make install
+#git clone -b v0.12.7-release https://github.com/joyent/node.git /tmp/node
+#cd /tmp/node && ./configure && make && sudo make install
 
 # install nvm since its possible that I will use different node version in 
 # future projects
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
 
+# Make it so that nodejs 4.2 is loaded by default.
+. $HOME/.nvm/nvm.sh
+nvm install 4.2
+nvm alias default 4.2
+
 # coffeescript
 sudo npm install coffee-script -g
-
-# clojure >8)
-wget -O /tmp/clojure.zip http://repo1.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.zip
-unzip /tmp/clojure.zip && rm /tmp/clojure.zip -f && mv -T /tmp/clojure* /tmp/clojure
-sudo mv /tmp/clojure/clojure-1.7.0.jar /usr/local/lib/clojure-1.7.0.jar
-sudo cp resource/clojure /usr/local/bin/clojure
-chmod +r /usr/local/lib/clojure*.jar
-
-# link for repl
-ln -s `pwd`/bin/clojure ~/bin/clojure
 
 # leinigen clojure build/dependency manager
 sudo wget -O /usr/local/bin/lein \
 	https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 sudo chmod +x /usr/local/bin/lein
-#. lib/compilers.sh
 
 # ---------------------
 # User Interface Tweaks
@@ -224,14 +212,14 @@ sudo chmod +x /usr/local/bin/lein
 
 #. lib/ui.sh elemetary freya
 
-sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
-sudo add-apt-repository ppa:numix/ppa
-sudo add-apt-repository ppa:moka/stable
-
-sudo apt-get update
-sudo apt-get install numix-gtk-theme numix-folders -y
-sudo apt-get install elementary-tweaks -y
-sudo apt-get install faba-icon-theme moka-icon-theme
+#sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
+#sudo add-apt-repository ppa:numix/ppa
+#sudo add-apt-repository ppa:moka/stable
+#
+#sudo apt-get update
+#sudo apt-get install numix-gtk-theme numix-folders -y
+#sudo apt-get install elementary-tweaks -y
+#sudo apt-get install faba-icon-theme moka-icon-theme
 
 # -----------
 # GUI Clients
@@ -244,8 +232,8 @@ sudo apt-get update
 sudo apt-get install spotify-client
 
 # dropbawxe
-git clone https://github.com/zant95/elementary-dropbox /tmp/elementary-dropbox 
-bash /tmp/elementary-dropbox/install.sh
+#git clone https://github.com/zant95/elementary-dropbox /tmp/elementary-dropbox 
+#bash /tmp/elementary-dropbox/install.sh
 
 # -------
 # Vim <3
@@ -275,32 +263,19 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 nvim +PlugInstall +qall
 
 # Install linters globally so the plugins can use them
-sudo npm install -g jscs jshint
+npm install -g jscs jshint
 
-# Install dependencies for Tern
-pushd ~/.config/nvim/plugged/tern_for_vim && \
-	npm install && \
-	popd
-
-# Link the tern config file to synchronization project
+# Link the tern config file to synchronize project
 ln -s `pwd`/../../common/.tern-config ~/.tern-config
 
 # YouCompleteMe needs cmake to compile
 sudo apt-get install cmake -y
 
 # And now, compile YouCompleteMe
-~/.config/nvim/plugged/YouCompleteMe/install.py
+~/.config/nvim/plugged/YouCompleteMe/install.py --tern-completer
 
 # Install patched fonts for the status line
 git clone https://github.com/powerline/fonts.git /tmp/fonts && \
 	/tmp/fonts/install.sh
 
 
-# ---------
-# Intellij
-# ---------
-#wget -O /tmp/intellij.tar.gz \
-# 	https://d1opms6zj7jotq.cloudfront.net/idea/ideaIC-14.1.4.tar.gz
-#tar -C /tmp -zx -f /tmp/intellij.tar.gz
-#mv idea* idea
-#/tmp/idea/bin/./idea
