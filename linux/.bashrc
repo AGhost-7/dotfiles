@@ -14,3 +14,6 @@ export BROWSER=chrome
 
 alias ls='ls --color=auto'
 alias snip='xclip -selection clipboard'
+alias vim='nvim'
+
+export XDG_CONFIG_PATH="$HOME/.config"
