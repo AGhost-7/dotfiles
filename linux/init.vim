@@ -5,14 +5,16 @@ call plug#begin("~/.config/nvim/plugged")
 " General Plugins
 " ---------------
 
-Plug 'scrooloose/nerdtree'
 " Directory search tool
+Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Man pages in vim
 Plug 'bruno-/vim-man'
 
-" Autocomplete
+" Autocomplete interface
+" Required:
+" ./install.py --tern-completer
 Plug 'Valloric/YouCompleteMe'
 
 " Fuzzy file name searcher
@@ -22,7 +24,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'BufOnly.vim'
 
 " Powerline doesn't work on neovim
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+
+" Add some themes for airline
+Plug 'vim-airline/vim-airline-themes'
 
 " General purpose syntax checker, run `npm install -g jshint` to install js 
 " support. `npm install -g coffeelint` for coffeescript, etc.
@@ -35,16 +40,13 @@ Plug 'scrooloose/syntastic'
 Plug 'derekwyatt/vim-scala'
 Plug 'kchmck/vim-coffee-script'
 Plug 'AGhost-7/vim-nwscript'
-Plug 'wting/rust.vim'
-Plug 'racer-rust/vim-racer'
+"Plug 'wting/rust.vim'
+"Plug 'racer-rust/vim-racer'
 Plug 'VimClojure'
 Plug 'ensime/ensime-vim' " scala plugin
 
 " Better javascript indentation
 Plug 'pangloss/vim-javascript'
-
-" Type inference engine, will enhance autocompletion, etc.
-Plug 'marijnh/tern_for_vim'
 
 " support for react.js inline html
 Plug 'mxw/vim-jsx'
@@ -114,5 +116,5 @@ let g:airline_powerline_fonts = 1
 autocmd VimEnter * AirlineTheme powerlineish
 
 " Rust Autocmplete Configs
-let g:racer_cmd = "/home/jonathan/.multirust/toolchains/beta/cargo/bin/racer"
-let $RUST_SRC_PATH = "/home/jonathan/.multirust/toolchains/beta/cargo/registry/src/github.com-0a35038f75765ae4"
+"let g:racer_cmd = "/home/jonathan/.multirust/toolchains/beta/cargo/bin/racer"
+"let $RUST_SRC_PATH = "/home/jonathan/.multirust/toolchains/beta/cargo/registry/src/github.com-0a35038f75765ae4"
