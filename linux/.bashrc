@@ -20,5 +20,3 @@ export XDG_CONFIG_PATH="$HOME/.config"
 
 export EDITOR=nvim
 
-export GH_USER='AGhost-7'
-export GH_PASSWORD='34Rresio**72j'
