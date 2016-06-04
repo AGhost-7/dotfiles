@@ -11,11 +11,11 @@
 #
 
 # Install Script Parameters
-user=$1
-: ${user:="jonathan"}
+#user=$1
+#: ${user:="jonathan"}
 
-computer=$2
-: ${computer:="inpsiron"}
+#computer=$2
+#: ${computer:="inpsiron"}
 
 # update since this is the first time running the ubuntu instance
 sudo apt-get update
@@ -27,8 +27,11 @@ sudo apt-get update
 # . lib/essential.sh
 
 # Start by installing build dep I'm going to need to install my shizzle
-sudo apt-get install wget make build-essential g++ software-properties-common git \
+sudo apt-get install wget make build-essential g++ software-properties-common \
 	unzip ca-certificates -y
+
+# Install pip dependency manager
+sudo apt-get install python-pip -y
 
 # Install interactive terminal file manager
 sudo apt-get install mc -y
@@ -49,6 +52,8 @@ ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 # Command line clipboard utility
 sudo apt-get install xclip -y
 
+# OMG CURL
+sudo apt-get install curl -y
 # ---------
 # Shortcuts
 # ---------
@@ -86,12 +91,10 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 
 # bin for scripts
 mkdir ~/bin
+rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
+. ~/.bashrc
 
-#chown $user ~/bin
-
-# add my bashrc file
-#cp resource/bashrc ~/.bashrc
 
 # Setup filesystem first so that dropbox will sync from the hard drive instead of the ssd
 #. lib/fs.sh inspiron
@@ -199,7 +202,7 @@ nvm install 4.2
 nvm alias default 4.2
 
 # coffeescript
-sudo npm install coffee-script -g
+npm install coffee-script -g
 
 # leinigen clojure build/dependency manager
 sudo wget -O /usr/local/bin/lein \
@@ -229,11 +232,16 @@ sudo chmod +x /usr/local/bin/lein
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update
-sudo apt-get install spotify-client
+sudo apt-get install spotify-client -y
 
 # dropbawxe
 #git clone https://github.com/zant95/elementary-dropbox /tmp/elementary-dropbox 
 #bash /tmp/elementary-dropbox/install.sh
+
+# Slack Client
+sudo apt-add-repository -y ppa:rael-gc/scudcloud
+sudo apt-get update
+sudo apt-get install scudcloud -y
 
 # -------
 # Vim <3
@@ -243,17 +251,14 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install neovim -y
 
-# Neovim uses XDG spec, so I need to export the home directory to an env variable
-echo '
-export XDG_CONFIG_PATH="$HOME/.config"' >> /home/vagrant/.bashrc
-
 # Tern and YCM will need python support enabled
-sudo apt-get install python-pip python-dev
+sudo apt-get install python-pip python-dev -y
 sudo pip install neovim
 
 # Link the init.vim file
 mkdir -p ~/.config/nvim
 ln -s `pwd`/init.vim ~/.config/nvim/init.vim
+ln -s `pwd`/plugins.vim ~/.config/nvim/plugins.vim
 
 # Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
