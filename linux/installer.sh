@@ -17,6 +17,7 @@
 #computer=$2
 #: ${computer:="inpsiron"}
 
+
 # update since this is the first time running the ubuntu instance
 sudo apt-get update
 
@@ -95,6 +96,11 @@ rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
 . ~/.bashrc
 
+
+#chown $user ~/bin
+
+# add my bashrc file
+#cp resource/bashrc ~/.bashrc
 
 # Setup filesystem first so that dropbox will sync from the hard drive instead of the ssd
 #. lib/fs.sh inspiron
@@ -201,8 +207,6 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | 
 nvm install 4.2
 nvm alias default 4.2
 
-# coffeescript
-npm install coffee-script -g
 
 # leinigen clojure build/dependency manager
 sudo wget -O /usr/local/bin/lein \
@@ -251,8 +255,12 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install neovim -y
 
+# Neovim uses XDG spec, so I need to export the home directory to an env variable
+echo '
+export XDG_CONFIG_PATH="$HOME/.config"' >> /home/vagrant/.bashrc
+
 # Tern and YCM will need python support enabled
-sudo apt-get install python-pip python-dev -y
+sudo apt-get install python-pip python-dev
 sudo pip install neovim
 
 # Link the init.vim file

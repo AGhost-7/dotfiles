@@ -49,11 +49,6 @@ Plugin 'jshint.vim'
 " Adds the ability to close all except the current buffer
 Plugin 'BufOnly.vim'
 
-" Type inference engine, will enhance autocompletion, etc.
-Plugin 'marijnh/tern_for_vim'
-
-Plugin 'kchmck/vim-coffee-script'
-
 call vundle#end()            " vundle required
 filetype plugin indent on    " vundle required
 
@@ -68,10 +63,6 @@ set tabstop=2
 " Set how many characters indentation should be. This will ensure that you're
 " using tabs, not spaces.
 set shiftwidth=2
-
-" Highlights the characters which go beyond 100 lines to the color which
-" correspond to the Error color of your color theme.
-match Error /\%101v.\+/
 
 " Add the column number
 set ruler
