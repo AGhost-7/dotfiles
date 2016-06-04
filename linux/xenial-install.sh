@@ -58,6 +58,17 @@ rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
 . ~/.bashrc
 
+# ------------------------
+# Dev. Env. Virtualization
+# ------------------------
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' \
+	| sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt-get update
+
+sudo apt-get install docker-engine -y
+sudo pip install docker-compose
+
 # ----
 # Tmux
 #-----
@@ -132,7 +143,7 @@ sudo apt-get install chromium-browser -y
 sudo apt-get install steam -y
 
 # Install ghetto-skype
-sudo apt-get install libappindicator1
+sudo apt-get install libappindicator1 -y
 curl -L -o /tmp/ghetto-skype.deb https://github.com/stanfieldr/ghetto-skype/releases/download/v1.2.3/ghetto-skype_1.2.3_amd64.deb
 sudo dpkg --install /tmp/ghetto-skype.deb
 
