@@ -34,19 +34,20 @@ Plug 'scrooloose/syntastic'
 " Language Support Plugins
 " ------------------------
 
-Plug 'derekwyatt/vim-scala'
-Plug 'kchmck/vim-coffee-script'
-Plug 'AGhost-7/vim-nwscript'
-Plug 'wting/rust.vim'
+" With my docker-dev project I don't need as many of these anymore...
+"Plug 'derekwyatt/vim-scala'
+"Plug 'kchmck/vim-coffee-script'
+"Plug 'AGhost-7/vim-nwscript'
+"Plug 'wting/rust.vim'
 "Plug 'racer-rust/vim-racer'
-Plug 'VimClojure'
-Plug 'ensime/ensime-vim' " scala plugin
+"Plug 'VimClojure'
+"Plug 'ensime/ensime-vim' " scala plugin
 
 " Better javascript indentation
 Plug 'pangloss/vim-javascript'
 
 " support for react.js inline html
-Plug 'mxw/vim-jsx'
+"Plug 'mxw/vim-jsx'
 
 " Add HTML5 support, also enables web components support.
 Plug 'othree/html5.vim'

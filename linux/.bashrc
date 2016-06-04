@@ -28,3 +28,8 @@ export DOCKED_EMAIL="jboudreau@i-sight.com"
 export DOCKED_GH_USERNAME="AGhost-7"
 export DOCKED_WORKSPACE="~/workspaces/work-test/workspace"
 export DOCKED_PATH="~/workspaces/vagrant-work/builds/docked"
+# And now run powerline for bash
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
