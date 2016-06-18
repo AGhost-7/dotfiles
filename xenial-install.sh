@@ -120,13 +120,15 @@ sudo apt-get install cmake -y
 git clone https://github.com/powerline/fonts.git /tmp/fonts && \
 	/tmp/fonts/install.sh
 
-# ----------
-# Encryption
-# ----------
+# ------------------
+# Account Management
+# ------------------
 sudo apt-get install ecryptfs-utils -y
 ecryptfs-setup-private
 ecryptfs-mount-private
 touch ~/Private/.accounts
+ln -s $HOME/Private/.accounts ~/.accounts
+ln -s $HOME/Private/.pypirc ~/.pypirc
 
 # -----------
 # GUI Clients
