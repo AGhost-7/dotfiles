@@ -37,6 +37,9 @@ command Bd bp|bd #
 " Buffer delete all others (delete all except current one)
 command Bdo BufOnly
 
+" Presentation-ish mode
+command Presentation Goyo|Limelight
+
 " Send to system clipboard by default
 set clipboard=unnamedplus
 
@@ -47,7 +50,7 @@ let g:ctrlp_custom_ignore = {
 
 " Enable the powerline fonts.
 let g:airline_powerline_fonts = 1
-
+let g:NERDTreeMouseMode = 2
 " Set the theme for vim-airline
 autocmd VimEnter * AirlineTheme powerlineish
 

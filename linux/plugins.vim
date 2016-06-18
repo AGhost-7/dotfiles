@@ -30,6 +30,16 @@ Plug 'vim-airline/vim-airline-themes'
 " support. `npm install -g coffeelint` for coffeescript, etc.
 Plug 'scrooloose/syntastic'
 
+" Dims code.
+Plug 'junegunn/limelight.vim'
+
+" Minimalist mode.
+Plug 'junegunn/goyo.vim'
+
+" Fuzy file search
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+
 " ------------------------
 " Language Support Plugins
 " ------------------------
