@@ -4,6 +4,7 @@ h=/home/aghost-7
 run-dev() {
 	name=$1
 	tag=$2
+	xhost +si:localuser:$USER > /dev/null
 	docker run -ti \
 		--rm --name $name \
 		-v $HOME/workspaces:$h/workspaces \
