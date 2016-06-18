@@ -123,7 +123,7 @@ git clone https://github.com/powerline/fonts.git /tmp/fonts && \
 # ----------
 # Encryption
 # ----------
-sudo apt-get install ecryptfs-utils
+sudo apt-get install ecryptfs-utils -y
 ecryptfs-setup-private
 ecryptfs-mount-private
 touch ~/Private/.accounts
