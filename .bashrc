@@ -1,6 +1,6 @@
 
 if [ -f ~/Private/.accounts ]; then
-	. ~/.Private/.accounts
+	. ~/Private/.accounts
 fi
 
 export PATH="$PATH:~/bin:$HOME/.local/bin"
