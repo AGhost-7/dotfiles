@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-#
-#	Clojure REPL run script.
-#
-
-java -cp /usr/local/lib/clojure-1.7.0.jar clojure.main $1

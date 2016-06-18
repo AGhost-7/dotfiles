@@ -102,7 +102,6 @@ sudo pip install neovim
 # Link the init.vim file
 mkdir -p ~/.config/nvim
 ln -s `pwd`/init.vim ~/.config/nvim/init.vim
-ln -s `pwd`/plugins.vim ~/.config/nvim/plugins.vim
 
 # Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
