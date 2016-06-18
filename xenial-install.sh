@@ -101,7 +101,7 @@ sudo pip install neovim
 
 # Link the init.vim file
 mkdir -p ~/.config/nvim
-ln -s `pwd`/init.vim ~/.config/nvim/init.vim
+ln -s "$(pwd)"/init.vim ~/.config/nvim/init.vim
 
 # Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
@@ -119,6 +119,14 @@ sudo apt-get install cmake -y
 # Install patched fonts for the status line
 git clone https://github.com/powerline/fonts.git /tmp/fonts && \
 	/tmp/fonts/install.sh
+
+# ----------
+# Encryption
+# ----------
+sudo apt-get install ecryptfs-utils
+ecryptfs-setup-private
+ecryptfs-mount-private
+touch ~/Private/.accounts
 
 # -----------
 # GUI Clients
