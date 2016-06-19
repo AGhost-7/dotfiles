@@ -156,6 +156,10 @@ sudo apt-get install libappindicator1 -y
 curl -L -o /tmp/ghetto-skype.deb https://github.com/stanfieldr/ghetto-skype/releases/download/v1.2.3/ghetto-skype_1.2.3_amd64.deb
 sudo dpkg --install /tmp/ghetto-skype.deb
 
+# Facebook messenger for desktop
+curl -L -o /tmp/Messenger.deb https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux64.deb
+sudo dpkg -i /tmp/Messenger.deb
+
 # Install dropbox
 pushd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ~/.dropbox-dist/dropboxd
