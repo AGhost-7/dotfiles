@@ -5,7 +5,6 @@ fi
 
 export PATH="$PATH:~/bin:$HOME/.local/bin"
 
-
 export TERM=screen-256color
 export BROWSER=chrome
 
@@ -18,14 +17,7 @@ export XDG_CONFIG_PATH="$HOME/.config"
 
 export EDITOR=nvim
 export BROWSER=chromium-browser
-
-export NODE_ENV=development
-export PATH="$PATH:$HOME/.cargo/bin"
 export WINEPREFIX="$HOME/.wineprefix32"
-export DOCKED_EMAIL="jboudreau@i-sight.com"
-export DOCKED_GH_USERNAME="AGhost-7"
-export DOCKED_WORKSPACE="~/workspaces/work-test/workspace"
-export DOCKED_PATH="~/workspaces/vagrant-work/builds/docked"
 # And now run powerline for bash
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
