@@ -6,7 +6,9 @@ run-dev() {
 	tag=$2
 	xhost +si:localuser:$USER > /dev/null
 	docker run -ti \
+		--privileged \
 		--rm --name $name \
+		-v `readlink -f /var/run/docker.sock`:/var/run/docker.sock \
 		-v $HOME/workspaces:$h/workspaces \
 		-v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
 		-e SSH_AUTH_SOCK=$SSH_AUTH_SOCK \
@@ -26,7 +28,10 @@ case "$1" in
 		run-dev rust-dev stable
 		;;
 	node)
-		run-dev nodejs-dev 4.4.4
+		run-dev nodejs-dev v4.4.4
+		;;
+	scala)
+		run-dev scala-dev latest
 		;;
 	*)
 		echo Bad argument \"$1\"
