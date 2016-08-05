@@ -3,6 +3,8 @@
 # Ubuntu Xenial GNOME 3 Installer script #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
+set -e
+
 DEBIAN_FRONTEND=noninteractive
 
 # Start by installing build dep I'm going to need to install my shizzle
@@ -130,6 +132,18 @@ touch ~/Private/.accounts
 ln -s $HOME/Private/.accounts ~/.accounts
 ln -s $HOME/Private/.pypirc ~/.pypirc
 
+# ------
+# Gaming
+# ------
+
+# Update Mesa Driver
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+sudo apt-get update
+sudo apt-get upgrade -y
+
+# Steam Games!
+sudo apt-get install steam -y
+
 # -----------
 # GUI Clients
 # -----------
@@ -148,9 +162,6 @@ sudo apt-get install scudcloud -y
 # Chromium
 sudo apt-get install chromium-browser -y
 
-# Steam Games!
-sudo apt-get install steam -y
-
 # Install ghetto-skype
 sudo apt-get install libappindicator1 -y
 curl -L -o /tmp/ghetto-skype.deb https://github.com/stanfieldr/ghetto-skype/releases/download/v1.2.3/ghetto-skype_1.2.3_amd64.deb
@@ -164,3 +175,4 @@ sudo dpkg -i /tmp/Messenger.deb
 pushd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ~/.dropbox-dist/dropboxd
 popd
+
