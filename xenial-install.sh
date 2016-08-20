@@ -171,6 +171,9 @@ sudo dpkg --install /tmp/ghetto-skype.deb
 curl -L -o /tmp/Messenger.deb https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux64.deb
 sudo dpkg -i /tmp/Messenger.deb
 
+# Video Editor
+sudo apt-get install kdenlive -y
+
 # Install dropbox
 pushd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ~/.dropbox-dist/dropboxd
