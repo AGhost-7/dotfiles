@@ -8,6 +8,7 @@ run-dev() {
 	docker run -ti \
 		--privileged \
 		--rm --name $name \
+		--detach-keys 'ctrl-q,ctrl-q' \
 		-v `readlink -f /var/run/docker.sock`:/var/run/docker.sock \
 		-v $HOME/workspaces:$h/workspaces \
 		-v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
