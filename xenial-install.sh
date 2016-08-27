@@ -58,7 +58,6 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 mkdir ~/bin
 rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
-. ~/.bashrc
 
 # ------------------------
 # Dev. Env. Virtualization
