@@ -29,7 +29,7 @@ sudo apt-get install dconf-editor -y
 
 # guake
 sudo apt-get install guake -y
-ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
+sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 # Command line clipboard utility
 sudo apt-get install xclip -y
