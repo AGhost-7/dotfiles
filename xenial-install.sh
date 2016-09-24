@@ -43,6 +43,9 @@ sudo apt-get install iftop -y
 # Per-process disk usage monitor
 sudo apt-get install iotop -y
 
+# Bandwidth usage monitor
+sudo apt-get install vnstat -y
+
 # ---------
 # Shortcuts
 # ---------
