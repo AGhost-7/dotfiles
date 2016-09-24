@@ -12,16 +12,14 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Man pages in vim
 Plug 'bruno-/vim-man'
 
-" Autocomplete interface
-" Required:
-" ./install.py --tern-completer
-Plug 'Valloric/YouCompleteMe'
-
 " Fuzzy file name searcher
 Plug 'kien/ctrlp.vim'
 
 " Adds the ability to close all except the current buffer
 Plug 'BufOnly.vim'
+
+" Note taking.
+Plug 'junegunn/vim-journal'
 
 " Powerline doesn't work on neovim
 Plug 'vim-airline/vim-airline'
@@ -39,28 +37,8 @@ Plug 'junegunn/limelight.vim'
 " Minimalist mode.
 Plug 'junegunn/goyo.vim'
 
-" Fuzy file search
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-
-" ------------------------
-" Language Support Plugins
-" ------------------------
-
-" With my docker-dev project I don't need as many of these anymore...
-"Plug 'derekwyatt/vim-scala'
-"Plug 'kchmck/vim-coffee-script'
-"Plug 'AGhost-7/vim-nwscript'
-"Plug 'wting/rust.vim'
-"Plug 'racer-rust/vim-racer'
-"Plug 'VimClojure'
-"Plug 'ensime/ensime-vim' " scala plugin
-
 " Better javascript indentation
 Plug 'pangloss/vim-javascript'
-
-" support for react.js inline html
-"Plug 'mxw/vim-jsx'
 
 " Add HTML5 support, also enables web components support.
 Plug 'othree/html5.vim'
@@ -68,12 +46,7 @@ Plug 'othree/html5.vim'
 " Syntax support for editing markdown files.
 Plug 'tpope/vim-markdown'
 
-" ------------------
-" Some color schemes
-" ------------------
-
-Plug 'vim-scripts/C64.vim'
-Plug 'vim-scripts/PaperColor.vim'
+" Color theme
 Plug 'crusoexia/vim-monokai'
 
 call plug#end()
@@ -112,9 +85,6 @@ command Bd bp|bd #
 " Buffer delete all others (delete all except current one)
 command Bdo BufOnly
 
-" Presentation-ish mode
-command Presentation Goyo|Limelight
-
 " Send to system clipboard by default
 set clipboard=unnamedplus
 
@@ -126,11 +96,8 @@ let g:ctrlp_custom_ignore = {
 " Enable the powerline fonts.
 let g:airline_powerline_fonts = 1
 let g:NERDTreeMouseMode = 2
+
 " Set the theme for vim-airline
 autocmd VimEnter * AirlineTheme powerlineish
 
-au BufRead,BufNewFile *.es6 set filetype=javascript
 
-" Rust Autocmplete Configs
-"let g:racer_cmd = "/home/jonathan/.multirust/toolchains/beta/cargo/bin/racer"
-"let $RUST_SRC_PATH = "/home/jonathan/.multirust/toolchains/beta/cargo/registry/src/github.com-0a35038f75765ae4"
