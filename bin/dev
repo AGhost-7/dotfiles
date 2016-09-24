@@ -5,6 +5,9 @@ run-dev() {
 	name=$1
 	tag=$2
 	xhost +si:localuser:$USER > /dev/null
+	if [ ! -f ~/.gitconfig ]; then
+		touch ~/.gitconfig
+	fi
 	docker run -ti \
 		--privileged \
 		--rm --name $name \
