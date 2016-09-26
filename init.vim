@@ -100,4 +100,7 @@ let g:NERDTreeMouseMode = 2
 " Set the theme for vim-airline
 autocmd VimEnter * AirlineTheme powerlineish
 
+" Enable marker based folding
+set foldmethod=marker
 
+set nofoldenable
