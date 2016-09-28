@@ -28,6 +28,8 @@ sudo apt-get install tree -y
 sudo apt-get install dconf-editor -y
 
 # guake
+mkdir -p ~/.gconf/guake
+ln -s `pwd`/guake ~/gconf/apps/guake
 sudo apt-get install guake -y
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
