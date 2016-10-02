@@ -153,8 +153,8 @@ assign [class="Spotify"] $workspace9
 
 # {{ Floating programs
 for_window [class="Steam"] floating enable
-for_window [class="Ghetto Skype"] floating enable
-for_window [class="ScudCloud"] floating enable
+#for_window [class="Ghetto Skype"] floating enable
+#for_window [class="ScudCloud"] floating enable
 # }}
 
 # exit i3 (logs you out of your X session)
