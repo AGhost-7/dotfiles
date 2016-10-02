@@ -104,7 +104,29 @@ bindsym $mod+a focus parent
 bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
 
-bindsym $mod+b exec xdg-open $HOME
+# Use file browser
+bindsym $mod+b exec --no-startup-id xdg-open $HOME
+
+# {{ Management Menus
+set $mode_manage "Manage: [s]oundcard [n]etwork [m]onitor"
+bindsym $mod+m mode $mode_manage
+
+mode $mode_manage {
+
+	# Open the network manager
+	bindsym n exec --no-startup-id nmcli_dmenu
+
+	# Open the sound card manager
+	bindsym s exec --no-startup-id mmswitch-sound --dmenu
+
+	# Open the monitor manager
+	bindsym m exec --no-startup-id mmswitch-monitor --dmenu
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+# }}
+
 # {{ Workspaces
 
 # focus the child container
@@ -220,5 +242,5 @@ bar {
 
 # {{ Startup commands
 exec feh --bg-scale ~/Pictures/Desktop.jpg
-exec ~/bin/i3-tools select-monitor
+exec ~/bin/i3-tools autoselect-monitor
 # }}
