@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get instal i3 i3-block -y
+sudo apt-get instal i3 i3blocks -y
 sudo apt-get install pulseaudio-utils amixer -y
 sudo apt-get install feh -y
 
