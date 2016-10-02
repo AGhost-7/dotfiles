@@ -20,9 +20,8 @@ ln -s `pwd`/mmswitch-monitor ~/bin/mmswitch-monitor
 # Sound manager
 ln -s `pwd`/mmswitch-sound ~/bin/mmswitch-sound
 
-# Install command line network manager
-#sudo apt-get install wicd-curses -y
-#sudo usermod -a -G netdev "$USER"
+# Get a more appropiate terminal for i3
+./termite-install.sh
 
 mkdir -p ~/.config/i3
 ln -s `pwd`/i3/config ~/.config/i3
