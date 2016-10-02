@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+case "$1" in
+	select-monitor)
+		if [ "$(xrandr | grep 'HDMI1 connected')" != "" ]; then
+			# I want to disable my builtin monitor when I'm connected
+			# to the external one.
+			xrandr --output HDMI1 --auto --output LVDS1 --off
+		fi
+		;;
+	select-sound-card)
+		if [[ "$(pacmd list-cards)" == *Focusrite* ]]; then
+			# If my external sound card is connected I want to connect to it.
+			for input in "$(pacmd list-sink-inputs | grep index | grep -Eo '[0-9]+$')"; do
+				pacmd move-sink-input "$input" 0
+			done
+		fi
+		;;
+esac
