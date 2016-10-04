@@ -1,6 +1,13 @@
 #!/bin/sh
 
-DMENU_ARGS='-nb #151515 -nf #787878 -sb #151515 -sf #a78edb -fn -*-*-medium-r-normal-*-*-*-*-*-*-80-*-*'
+base01='#1f222d'
+base02='#252936'
+base03='#7780a1'
+base07='#ffffff'
+
+font='ubuntu-10:monospace'
+
+DMENU_ARGS="-nb $base01 -nf $base03 -sb $base01 -sf $base07 -fn $font"
 
 die() {
 	echo "$(basename $0): Error: $1" >&2
