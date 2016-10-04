@@ -102,8 +102,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Volume buttons
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
 
 # Use file browser
 bindsym $mod+b exec --no-startup-id xdg-open $HOME
