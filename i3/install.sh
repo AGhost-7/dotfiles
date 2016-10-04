@@ -20,9 +20,6 @@ ln -s `pwd`/mmswitch-monitor ~/bin/mmswitch-monitor
 # Sound manager
 ln -s `pwd`/mmswitch-sound ~/bin/mmswitch-sound
 
-# Get a more appropiate terminal for i3
-./termite-install.sh
-
 mkdir -p ~/.config/i3
 ln -s `pwd`/i3/config ~/.config/i3
 mkdir -p ~/bin
