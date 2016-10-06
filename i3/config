@@ -7,6 +7,8 @@ set $mod Mod4
 # System font...
 font pango: Ubuntu Mono, FontAwesome 10
 
+set $font ubuntu-10:monospace
+
 # {{ Colours
 set $base00 #101218
 set $base01 #1f222d
@@ -41,7 +43,7 @@ bindsym $mod+Return exec gnome-terminal --hide-menubar
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nb $base01 -nf $base03 -sb $base01 -sf $base07 -fn $font"
 
 # Hide the borders entirely
 hide_edge_borders both
