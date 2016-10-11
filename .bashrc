@@ -28,4 +28,4 @@ POWERLINE_BASH_SELECT=1
 export FZF_DEFAULT_OPTS='--color=light,hl:12,hl+:15,info:10,bg+:4'
 
 alias todo="nvim $HOME/workspaces/todo.md"
-
+alias nyan='nc -v nyancat.dakko.us 23'
