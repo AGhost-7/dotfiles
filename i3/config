@@ -235,6 +235,6 @@ bar {
 }
 
 # {{ Startup commands
-exec feh --bg-scale ~/Pictures/Desktop.jpg
 exec ~/bin/i3-tools autoselect-monitor
+exec feh --bg-scale ~/Pictures/Desktop.jpg
 # }}
