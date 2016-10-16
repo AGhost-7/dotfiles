@@ -8,7 +8,7 @@ run-dev() {
 	if [ ! -f ~/.gitconfig ]; then
 		touch ~/.gitconfig
 	fi
-	if [ `docker network ls | awk '{print $2;}' | grep -E '^dev$'` == "" ]; then
+	if [ "$(docker network ls | awk '$2 == "dev" { print $1; }')" == "" ]; then
 		docker network create dev
 	fi
 	docker run -ti \
