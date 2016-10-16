@@ -40,10 +40,10 @@ floating_modifier $mod
 bindsym $mod+Return exec gnome-terminal --hide-menubar
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nb $base01 -nf $base03 -sb $base01 -sf $base07 -fn $font"
+bindsym $mod+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nb $base01 -nf $base03 -sb $base01 -sf $base07 -fn $font"
 
 # Hide the borders entirely
 hide_edge_borders both
@@ -84,14 +84,14 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+g layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -222,6 +222,8 @@ bar {
 	#height 25
 	bindsym button4 nop
 	bindsym button5 nop
+	# Hide application icons.
+	tray_output none
 	colors {
 		separator $base03
 		background $base01
@@ -235,6 +237,6 @@ bar {
 }
 
 # {{ Startup commands
-exec ~/bin/i3-tools autoselect-monitor
-exec feh --bg-scale ~/Pictures/Desktop.jpg
+exec --no-startup-id ~/bin/i3-tools autoselect-monitor
+exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Desktop.jpg
 # }}
