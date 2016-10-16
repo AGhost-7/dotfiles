@@ -31,3 +31,16 @@ curl -L -o /tmp/font-awesome.tar.gz https://github.com/FortAwesome/Font-Awesome/
 tar xzf /tmp/font-awesome.tar.gz -C /tmp
 mkdir -p ~/.fonts
 cp /tmp/Font-Awesome-4.6.3/fonts/FontAwesome.otf ~/.fonts
+
+if [ ! -f /usr/share/xsessions/i3.desktop ]; then
+	sudo tee /usr/share/xsessions/i3.desktop <<-CONFIG
+	[Desktop Entry]
+	Name=i3
+	Comment=improved dynamic tiling window manager
+	Exec=i3
+	TryExec=i3
+	Type=Application
+	X-LightDM-DesktopName=i3
+	DesktopNames=i3
+	CONFIG
+fi
