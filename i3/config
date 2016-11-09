@@ -82,6 +82,9 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# Open up a menu similar to ctrlp
+bindsym $mod+p exec --no-startup-id quickswitch.py
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
@@ -100,28 +103,8 @@ bindsym $mod+a focus parent
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
 
-# Use file browser
-bindsym $mod+b exec --no-startup-id xdg-open $HOME
-
-# {{ Management Menus
-set $mode_manage "Manage: [s]oundcard [n]etwork [m]onitor"
-bindsym $mod+m mode $mode_manage
-
-mode $mode_manage {
-
-	# Open the network manager
-	bindsym n exec --no-startup-id nmcli_dmenu
-
-	# Open the sound card manager
-	bindsym s exec --no-startup-id mmswitch-sound --dmenu
-
-	# Open the monitor manager
-	bindsym m exec --no-startup-id mmswitch-monitor --dmenu
-
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
-}
-# }}
+# Open web browser
+bindsym $mod+w exec --no-startup-id chromium-browser
 
 # {{ Workspaces
 set $workspace1 "1"
@@ -173,8 +156,40 @@ for_window [class="Steam"] floating enable
 #for_window [class="ScudCloud"] floating enable
 # }}
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# {{ Management Mode
+set $mode_manage "Manage: [s]oundcard [n]etwork [m]onitor"
+bindsym $mod+m mode $mode_manage
+
+mode $mode_manage {
+
+	# Open the network manager
+	bindsym n exec --no-startup-id nmcli_dmenu
+
+	# Open the sound card manager
+	bindsym s exec --no-startup-id mmswitch-sound --dmenu
+
+	# Open the monitor manager
+	bindsym m exec --no-startup-id mmswitch-monitor --dmenu
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+# }}
+
+# {{ Exit Mode
+set $mode_exit "Exit: [s]hutdown [r]estart [l]ogout"
+bindsym $mod+e mode $mode_exit
+
+mode $mode_exit {
+	
+	bindsym s exec --no-startup-id shutdown now
+	bindsym r exec --no-startup-id shutdown -r now
+	bindsym l exec --no-startup-id i3-msg exit
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+# }}
 
 # {{ Resize Mode
 set mode_resize "resize"

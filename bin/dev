@@ -29,6 +29,14 @@ run-dev() {
 		bash
 }
 
+run-pg-dev() {
+	if [ "$(docker ps | awk '$2 ~ /pg-dev/ { print $1 }')" == "" ]; then
+		docker run --net=dev --rm --name pg-dev aghost7/pg-dev:9.3 &
+		sleep 4
+	fi
+	docker exec -ti pg-dev bash
+}
+
 case "$1" in
 	py)
 		run-dev py-dev 2.7
@@ -37,13 +45,16 @@ case "$1" in
 		run-dev rust-dev stable
 		;;
 	node)
-		run-dev nodejs-dev argon
+		run-dev nodejs-dev boron
 		;;
 	scala)
 		run-dev scala-dev latest
 		;;
 	go)
 		run-dev go-dev 1.6
+		;;
+	pg)
+		run-pg-dev
 		;;
 	*)
 		echo Bad argument \"$1\"

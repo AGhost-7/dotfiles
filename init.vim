@@ -49,6 +49,9 @@ Plug 'tpope/vim-markdown'
 " Color theme
 Plug 'crusoexia/vim-monokai'
 
+" Git integration
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
 " Tab shizzle

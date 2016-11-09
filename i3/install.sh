@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-get update
-sudo apt-get instal i3 i3blocks -y
+sudo apt-get instal i3 i3-wm i3blocks -y
 sudo apt-get install pulseaudio-utils amixer -y
 sudo apt-get install feh -y
 
@@ -25,6 +25,10 @@ ln -s `pwd`/i3/config ~/.config/i3
 mkdir -p ~/bin
 ln -s `pwd`/i3-tools ~/bin/i3-tools
 ln -s `pwd`/blocks ~/.config/i3/blocks
+
+# tool similar to ctrlp
+sudo pip install i3-py
+sudo pip install quickswitch-i3
 
 # Install extra fonts...
 curl -L -o /tmp/font-awesome.tar.gz https://github.com/FortAwesome/Font-Awesome/archive/v4.6.3.tar.gz
