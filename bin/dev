@@ -8,10 +8,14 @@ run-dev() {
 	if [ ! -f ~/.gitconfig ]; then
 		touch ~/.gitconfig
 	fi
+	if [ "$(docker network ls | awk '$2 == "dev" { print $1; }')" == "" ]; then
+		docker network create dev
+	fi
 	docker run -ti \
 		--privileged \
 		--rm --name $name \
 		--detach-keys 'ctrl-q,ctrl-q' \
+		-u `id -u $USER` \
 		-v `readlink -f /var/run/docker.sock`:/var/run/docker.sock \
 		-v $HOME/workspaces:$h/workspaces \
 		-v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
@@ -20,8 +24,17 @@ run-dev() {
 		-v $HOME/.ssh/known_hosts:$h/.ssh/known_hosts \
 		-e DISPLAY=$DISPLAY \
 		-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+		--net=dev \
 		aghost7/$name:$tag \
 		bash
+}
+
+run-pg-dev() {
+	if [ "$(docker ps | awk '$2 ~ /pg-dev/ { print $1 }')" == "" ]; then
+		docker run --net=dev --rm --name pg-dev aghost7/pg-dev:9.3 &
+		sleep 4
+	fi
+	docker exec -ti pg-dev bash
 }
 
 case "$1" in
@@ -38,7 +51,10 @@ case "$1" in
 		run-dev scala-dev latest
 		;;
 	go)
-		run-dev go-dev latest
+		run-dev go-dev 1.6
+		;;
+	pg)
+		run-pg-dev
 		;;
 	*)
 		echo Bad argument \"$1\"

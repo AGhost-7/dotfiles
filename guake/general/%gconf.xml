@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <gconf>
+	<entry name="window_height_f" mtime="1475346381" type="float" value="47.222222222222221"/>
+	<entry name="window_height" mtime="1475346381" type="int" value="47"/>
 	<entry name="use_vte_titles" mtime="1475027385" type="bool" value="false"/>
 	<entry name="window_ontop" mtime="1475027385" type="bool" value="false"/>
 	<entry name="compat_delete" mtime="1475027386" type="string">
