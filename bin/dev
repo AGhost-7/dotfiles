@@ -32,7 +32,7 @@ case "$1" in
 		run-dev rust-dev stable
 		;;
 	node)
-		run-dev nodejs-dev v4.4.4
+		run-dev nodejs-dev boron
 		;;
 	scala)
 		run-dev scala-dev latest
