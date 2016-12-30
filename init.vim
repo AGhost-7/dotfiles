@@ -9,9 +9,6 @@ call plug#begin("~/.config/nvim/plugged")
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Man pages in vim
-Plug 'bruno-/vim-man'
-
 " Fuzzy file name searcher
 Plug 'kien/ctrlp.vim'
 
@@ -26,10 +23,6 @@ Plug 'vim-airline/vim-airline'
 
 " Add some themes for airline
 Plug 'vim-airline/vim-airline-themes'
-
-" General purpose syntax checker, run `npm install -g jshint` to install js 
-" support. `npm install -g coffeelint` for coffeescript, etc.
-Plug 'scrooloose/syntastic'
 
 " Dims code.
 Plug 'junegunn/limelight.vim'

@@ -29,9 +29,11 @@ sudo apt-get install dconf-editor -y
 
 # guake
 mkdir -p ~/.gconf/guake
-ln -s `pwd`/guake ~/gconf/apps/guake
 sudo apt-get install guake -y
-sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
+
+if [ ! -f /etc/xdg/autostart/guake.desktop ]; then
+	sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
+fi
 
 # Command line clipboard utility
 sudo apt-get install xclip -y
@@ -60,90 +62,96 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 # ------------------------
 
 # bin for scripts
-mkdir ~/bin
+mkdir -p ~/bin
 rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
 
 # ------------------------
 # Dev. Env. Virtualization
 # ------------------------
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' \
-	| sudo tee /etc/apt/sources.list.d/docker.list
-sudo apt-get update
-
-sudo apt-get install docker-engine -y
-sudo pip install docker-compose
+if [ "$(which docker)" == "" ]; then
+	sudo apt-key adv \
+		       --keyserver hkp://ha.pool.sks-keyservers.net:80 \
+		       --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' \
+		| sudo tee /etc/apt/sources.list.d/docker.list
+	sudo apt-get update
+	sudo pip install docker-compose
+fi
 
 # ----
 # Tmux
 #-----
+if [ ! -f ~/.tmux.conf ]; then
+	sudo apt-get install tmux -y
+	ln -s `pwd`/.tmux.conf ~/.tmux.conf
 
-sudo apt-get install tmux -y
-ln -s `pwd`/.tmux.conf ~/.tmux.conf
+	# Default status bar at bottom of tmux is pretty bland and basic.
+	#pip install --user powerline-status
 
-# Default status bar at bottom of tmux is pretty bland and basic.
-pip install --user powerline-status
+	#wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf \
+	#	https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+	#mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
+	#fc-cache -vf ~/.fonts
+	#mkdir -p ~/.config/fontconfig/conf.d/ && \
+	#	mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
-wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf \
-	https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
-mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
-fc-cache -vf ~/.fonts
-mkdir -p ~/.config/fontconfig/conf.d/ && \
-	mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+	# Install patched fonts for the status line
+	git clone https://github.com/powerline/fonts.git /tmp/fonts && \
+		/tmp/fonts/install.sh
+fi
 
 # ---
 # Vim
 # ---
 
-# Add ppa and install neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim -y
+if [ "$(which nvim)" == "" ]; then
+	# Add ppa and install neovim
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt-get update
+	sudo apt-get install neovim -y
 
-# YCM will need python support enabled
-sudo apt-get install python-pip python-dev
-sudo pip install neovim
+	# YCM will need python support enabled
+	sudo apt-get install python-pip python-dev
+	sudo pip install neovim
 
-# Link the init.vim file
-mkdir -p ~/.config/nvim
-ln -s "$(pwd)"/init.vim ~/.config/nvim/init.vim
+	# Link the init.vim file
+	mkdir -p ~/.config/nvim
+	ln -s "$(pwd)"/init.vim ~/.config/nvim/init.vim
 
-# Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# Set up dependency manager! vim-plug is nicer than Vundle thanks to its parallel installation.
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Now install the dependencies
-nvim +PlugInstall +qall
+	# Now install the dependencies
+	nvim +PlugInstall +qall
 
-# YouCompleteMe needs cmake to compile
-sudo apt-get install cmake -y
+	# YouCompleteMe needs cmake to compile
+	#sudo apt-get install cmake -y
 
-# And now, compile YouCompleteMe
-~/.config/nvim/plugged/YouCompleteMe/install.py
+	# And now, compile YouCompleteMe
+	#~/.config/nvim/plugged/YouCompleteMe/install.py
 
-# Install patched fonts for the status line
-git clone https://github.com/powerline/fonts.git /tmp/fonts && \
-	/tmp/fonts/install.sh
+	# Install patched fonts for the status line
+	#git clone https://github.com/powerline/fonts.git /tmp/fonts && \
+	#	/tmp/fonts/install.sh
+fi
 
 # ------------------
 # Account Management
 # ------------------
-sudo apt-get install ecryptfs-utils -y
-ecryptfs-setup-private
-ecryptfs-mount-private
-touch ~/Private/.accounts
-ln -s $HOME/Private/.accounts ~/.accounts
-ln -s $HOME/Private/.pypirc ~/.pypirc
+if [ ! -d ~/Private ]; then
+	sudo apt-get install ecryptfs-utils -y
+	ecryptfs-setup-private
+	ecryptfs-mount-private
+	touch ~/Private/.accounts
+	ln -s $HOME/Private/.accounts ~/.accounts
+	ln -s $HOME/Private/.pypirc ~/.pypirc
+fi
 
 # ------
 # Gaming
 # ------
-
-# Update Mesa Driver
-sudo add-apt-repository ppa:oibaf/graphics-drivers
-sudo apt-get update
-sudo apt-get upgrade -y
 
 # Steam Games!
 sudo apt-get install steam -y

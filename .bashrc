@@ -19,13 +19,6 @@ export EDITOR=nvim
 export BROWSER=chromium-browser
 export WINEPREFIX="$HOME/.wineprefix32"
 # And now run powerline for bash
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_OPTS='--color=light,hl:12,hl+:15,info:10,bg+:4'
 
 alias todo="nvim $HOME/workspaces/todo.md"
 alias nyan='nc -v nyancat.dakko.us 23'
