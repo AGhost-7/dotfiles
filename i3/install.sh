@@ -2,29 +2,49 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
+set -e
+
 sudo apt-get update
-sudo apt-get instal i3 i3-wm i3blocks -y
-sudo apt-get install pulseaudio-utils amixer -y
+sudo apt-get install i3 i3-wm i3blocks -y
+sudo apt-get install pulseaudio-utils -y
 sudo apt-get install feh -y
 
-# Install network manager
-curl -o ~/bin/nmcli_dmenu \
-	https://raw.githubusercontent.com/firecat53/nmcli-dmenu/master/nmcli_dmenu
-chmod +x ~/bin/nmcli_dmenu
-mkdir -p ~/.config/networkmanager-dmenu
-ln -s `pwd`/networkmanager-dmenu.ini ~/.config/networkmanager-dmenu/config.ini
+if [ ! -f ~/bin/nmcli_dmenu ]; then
+	# Install network manager
+	curl -o ~/bin/nmcli_dmenu \
+		https://raw.githubusercontent.com/firecat53/nmcli-dmenu/master/nmcli_dmenu
+	chmod +x ~/bin/nmcli_dmenu
+	mkdir -p ~/.config/networkmanager-dmenu
+	ln -s `pwd`/networkmanager-dmenu.ini ~/.config/networkmanager-dmenu/config.ini
+fi
 
-# Monitor manager
-ln -s `pwd`/mmswitch-monitor ~/bin/mmswitch-monitor
+if [ ! -f ~/bin/mmswitch-monitor ]; then
+	# Monitor manager
+	ln -s `pwd`/mmswitch-monitor ~/bin/mmswitch-monitor
+fi
 
-# Sound manager
-ln -s `pwd`/mmswitch-sound ~/bin/mmswitch-sound
+if [ ! -f ~/bin/mmswitch-sound ]; then
+	# Sound manager
+	ln -s `pwd`/mmswitch-sound ~/bin/mmswitch-sound
+fi
 
-mkdir -p ~/.config/i3
-ln -s `pwd`/i3/config ~/.config/i3
-mkdir -p ~/bin
-ln -s `pwd`/i3-tools ~/bin/i3-tools
-ln -s `pwd`/blocks ~/.config/i3/blocks
+if [ ! -f ~/.config/i3/config ];  then
+	mkdir -p ~/.config/i3
+	ln -s `pwd`/config ~/.config/i3/config
+fi
+
+if [ ! -f ~/bin/i3-tools ]; then
+	mkdir -p ~/bin
+	ln -s `pwd`/i3-tools ~/bin/i3-tools
+fi
+
+if [ ! -f ~/.config/i3/blocks ]; then
+	ln -s `pwd`/blocks ~/.config/i3/blocks
+fi
+
+if [ ! -f ~/.i3blocks.conf ]; then
+	ln -s `pwd`/i3blocks.conf ~/.i3blocks.conf
+fi
 
 # tool similar to ctrlp
 sudo pip install i3-py
