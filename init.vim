@@ -1,4 +1,6 @@
 
+let s:is_oni = exists("g:gui_oni")
+
 call plug#begin("~/.config/nvim/plugged")
 
 " ---------------
@@ -9,8 +11,10 @@ call plug#begin("~/.config/nvim/plugged")
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Fuzzy file name searcher
-Plug 'kien/ctrlp.vim'
+if ! s:is_oni
+	" Fuzzy file name searcher
+	Plug 'kien/ctrlp.vim'
+endif
 
 " Adds the ability to close all except the current buffer
 Plug 'BufOnly.vim'
@@ -64,8 +68,10 @@ set relativenumber
 set mouse=a
 
 " Enable custom color theme
-set t_Co=256
-silent! colorscheme monokai
+if ! s:is_oni
+	set t_Co=256
+	silent! colorscheme monokai
+endif
 
 " Make it highlight red when I go beyond 80 lines.
 "match Error /\%91v.\+/
@@ -90,7 +96,10 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " Enable the powerline fonts.
-let g:airline_powerline_fonts = 1
+if ! s:is_oni
+	let g:airline_powerline_fonts = 1
+endif
+
 let g:NERDTreeMouseMode = 2
 
 " Set the theme for vim-airline

@@ -22,3 +22,6 @@ export WINEPREFIX="$HOME/.wineprefix32"
 
 alias todo="nvim $HOME/workspaces/todo.md"
 alias nyan='nc -v nyancat.dakko.us 23'
+
+export NVM_DIR="/home/jonathan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
