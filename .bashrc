@@ -29,3 +29,6 @@ export FZF_DEFAULT_OPTS='--color=light,hl:12,hl+:15,info:10,bg+:4'
 
 alias todo="nvim $HOME/workspaces/todo.md"
 alias nyan='nc -v nyancat.dakko.us 23'
+
+export NVM_DIR="/home/jonathan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
