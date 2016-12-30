@@ -63,6 +63,9 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 
 # bin for scripts
 mkdir -p ~/bin
+for bin in bin/*; do
+	ln -s `pwd`/$bin ~/bin/`basename $bin`
+done
 rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
 
