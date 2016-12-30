@@ -28,10 +28,6 @@ Plug 'vim-airline/vim-airline'
 " Add some themes for airline
 Plug 'vim-airline/vim-airline-themes'
 
-" General purpose syntax checker, run `npm install -g jshint` to install js 
-" support. `npm install -g coffeelint` for coffeescript, etc.
-Plug 'scrooloose/syntastic'
-
 " Dims code.
 Plug 'junegunn/limelight.vim'
 
