@@ -31,9 +31,9 @@ sudo apt-get install dconf-editor -y
 mkdir -p ~/.gconf/guake
 sudo apt-get install guake -y
 
-if [ ! -f /etc/xdg/autostart/guake.desktop ]; then
-	sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
-fi
+# Load the configs
+gconftool-2 --load guake/apps.xml
+gconftool-2 --load guake/schemas.xml
 
 # Command line clipboard utility
 sudo apt-get install xclip -y
