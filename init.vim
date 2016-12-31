@@ -45,6 +45,7 @@ Plug 'tpope/vim-markdown'
 
 " Color theme
 Plug 'crusoexia/vim-monokai'
+Plug 'jacoborus/tender.vim'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -69,8 +70,10 @@ set mouse=a
 
 " Enable custom color theme
 if ! s:is_oni
-	set t_Co=256
-	silent! colorscheme monokai
+	set background=dark
+	" Enable true colour mode
+	set termguicolors
+	silent! colorscheme tender
 endif
 
 " Make it highlight red when I go beyond 80 lines.
@@ -102,8 +105,18 @@ endif
 
 let g:NERDTreeMouseMode = 2
 
+" Show the buffers at the top
+let g:airline#extensions#tabline#enabled = 1
+
+" Show the buffer numbers so I can `:b 1`, etc
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" Aside from the buffer number, I literally just need the file name, so
+" strip out extraneous info.
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " Set the theme for vim-airline
-autocmd VimEnter * AirlineTheme powerlineish
+autocmd VimEnter * AirlineTheme tender
 
 " Enable marker based folding
 set foldmethod=marker

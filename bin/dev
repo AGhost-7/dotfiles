@@ -19,6 +19,7 @@ run-dev() {
 		-v `readlink -f /var/run/docker.sock`:/var/run/docker.sock \
 		-v $HOME/workspaces:$h/workspaces \
 		-v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
+		-v /etc/localtime:/etc/localtime:ro \
 		-e SSH_AUTH_SOCK=$SSH_AUTH_SOCK \
 		-v $HOME/.gitconfig:$h/.gitconfig \
 		-v $HOME/.ssh/known_hosts:$h/.ssh/known_hosts \

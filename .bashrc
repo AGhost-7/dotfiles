@@ -25,3 +25,7 @@ alias nyan='nc -v nyancat.dakko.us 23'
 
 export NVM_DIR="/home/jonathan/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+alias node=nodejs
