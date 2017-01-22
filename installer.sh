@@ -3,6 +3,7 @@
 # Ubuntu Xenial GNOME 3 Installer script #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
+set -o xtrace
 set -e
 
 DEBIAN_FRONTEND=noninteractive
@@ -62,10 +63,10 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only 'true'
 # ------------------------
 
 # bin for scripts
-mkdir -p ~/bin
-for bin in bin/*; do
-	ln -s `pwd`/$bin ~/bin/`basename $bin`
-done
+if [ ! -d ~/bin ]; then
+	ln -s $PWD/bin ~/bin
+fi
+# link bashrc
 rm ~/.bashrc
 ln -s `pwd`/.bashrc ~/.bashrc
 
@@ -73,12 +74,7 @@ ln -s `pwd`/.bashrc ~/.bashrc
 # Dev. Env. Virtualization
 # ------------------------
 if [ "$(which docker)" == "" ]; then
-	sudo apt-key adv \
-		       --keyserver hkp://ha.pool.sks-keyservers.net:80 \
-		       --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' \
-		| sudo tee /etc/apt/sources.list.d/docker.list
-	sudo apt-get update
+	curl -sSL https://get.docker.com/ | sh
 	sudo pip install docker-compose
 fi
 
@@ -97,10 +93,9 @@ fi
 # ---
 # Vim
 # ---
-
 if [ "$(which nvim)" == "" ]; then
 	# Add ppa and install neovim
-	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo add-apt-repository ppa:neovim-ppa/unstable -y
 	sudo apt-get update
 	sudo apt-get install neovim -y
 
@@ -120,6 +115,15 @@ if [ "$(which nvim)" == "" ]; then
 	nvim +PlugInstall +qall
 fi
 
+# -----
+# Fonts
+# -----
+if [ ! -f "$HOME"/.local/share/fonts/"Sauce Code Powerline Regular.otf" ]; then
+	git clone https://github.com/powerline/fonts.git /tmp/powerline-fonts
+	cd /tmp/powerline-fonts
+	./install.sh
+fi
+
 # ------------------
 # Account Management
 # ------------------
@@ -136,7 +140,9 @@ fi
 # Gaming
 # ------
 
-# Steam Games!
+# Install corefonts from debian directly due to bug in Ubuntu package.
+curl -o /tmp/ttf.deb http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+sudo dpkg -i /tmp/ttf.deb
 sudo apt-get install steam -y
 
 # -----------
