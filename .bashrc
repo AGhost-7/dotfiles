@@ -14,6 +14,7 @@ alias vim='nvim'
 
 # Mainly for neovim, which uses the xdg spec
 export XDG_CONFIG_PATH="$HOME/.config"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export EDITOR=nvim
 export BROWSER=chromium-browser

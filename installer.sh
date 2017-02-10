@@ -75,6 +75,7 @@ ln -s `pwd`/.bashrc ~/.bashrc
 # ------------------------
 if [ "$(which docker)" == "" ]; then
 	curl -sSL https://get.docker.com/ | sh
+	sudo usermod -aG docker $USER
 	sudo pip install docker-compose
 fi
 
