@@ -254,5 +254,6 @@ bar {
 # {{ Startup commands
 exec --no-startup-id ~/bin/i3-tools autoselect-monitor
 exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Desktop.jpg
-exec --no-startup-id sleep 1 && gnome-settings-daemon
+# This enables gtk theming.
+exec --no-startup-id gnome-settings-daemon
 # }}
