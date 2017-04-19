@@ -50,6 +50,9 @@ Plug 'jacoborus/tender.vim'
 " Git integration
 Plug 'tpope/vim-fugitive'
 
+" Github integration
+Plug 'tpope/vim-rhubarb'
+
 call plug#end()
 
 " Tab shizzle
@@ -117,6 +120,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Set the theme for vim-airline
 autocmd VimEnter * AirlineTheme tender
+
+" Use spaces instead just for yaml
+autocmd Filetype yaml setl expandtab
 
 " Enable marker based folding
 set foldmethod=marker
