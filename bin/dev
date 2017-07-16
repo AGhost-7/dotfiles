@@ -18,7 +18,7 @@ create-container() {
 		-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 		--net=dev \
 		aghost7/$1:$2 \
-		bash
+		tmux new
 }
 
 run-dev() {
