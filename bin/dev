@@ -4,6 +4,7 @@ h=/home/aghost-7
 
 create-container() {
 	docker run -ti \
+		--net=host \
 		--privileged \
 		--rm --name $name \
 		--detach-keys 'ctrl-q,ctrl-q' \
