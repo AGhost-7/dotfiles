@@ -17,7 +17,7 @@ if ! s:is_oni
 endif
 
 " Adds the ability to close all except the current buffer
-Plug 'BufOnly.vim'
+Plug 'vim-scripts/BufOnly.vim'
 
 " Note taking.
 Plug 'junegunn/vim-journal'
