@@ -14,11 +14,11 @@ create-container() {
 		-v /etc/localtime:/etc/localtime:ro \
 		-v $HOME/.gitconfig:$h/.gitconfig \
 		-v $HOME/.ssh/:$h/.ssh \
+		-v $HOME/.gnupg:$h/.gnupg \
 		-e DISPLAY=$DISPLAY \
 		-e GH_PASS \
 		-e GH_USER \
 		-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-		--net=dev \
 		aghost7/$1:$2 \
 		tmux new
 }
@@ -30,15 +30,12 @@ run-dev() {
 	if [ ! -f ~/.gitconfig ]; then
 		touch ~/.gitconfig
 	fi
-	if [ "$(docker network ls | awk '$2 == "dev" { print $1; }')" == "" ]; then
-		docker network create dev
-	fi
 	create-container "$@"
 }
 
 run-db() {
 	if [ "$(docker ps | awk "\$2 ~ /$1/ { print \$1 }")" == "" ]; then
-		docker run --net=dev --rm --name "$1" "aghost7/$1:$2"
+		docker run --rm --name "$1" "aghost7/$1:$2"
 		exit 0
 	fi
 	docker exec -ti "$1" bash
@@ -46,7 +43,7 @@ run-db() {
 
 case "$1" in
 	py)
-		run-dev py-dev 2.7
+		run-dev py-dev 3.5
 		;;
 	rust)
 		run-dev rust-dev nightly
