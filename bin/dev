@@ -49,7 +49,7 @@ case "$1" in
 		run-dev rust-dev nightly
 		;;
 	node)
-		run-dev nodejs-dev boron
+		run-dev nodejs-dev carbon
 		;;
 	scala)
 		run-dev scala-dev latest
