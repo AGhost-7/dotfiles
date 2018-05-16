@@ -30,3 +30,4 @@ export NVM_DIR="/home/jonathan/.nvm"
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 alias node=nodejs
+export TF_VAR_do_token="$DO_TOKEN"
