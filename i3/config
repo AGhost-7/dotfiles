@@ -192,7 +192,7 @@ mode $mode_exit {
 # }}
 
 # {{ Resize Mode
-set mode_resize "resize"
+set $mode_resize "resize"
 
 # resize window (you can also use the mouse for that)
 mode $mode_resize {
