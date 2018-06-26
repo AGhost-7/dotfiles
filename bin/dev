@@ -42,6 +42,9 @@ run-db() {
 }
 
 case "$1" in
+	ruby)
+		run-dev ruby-dev latest
+		;;
 	py)
 		run-dev py-dev 3.5
 		;;
