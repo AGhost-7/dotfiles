@@ -73,10 +73,16 @@ ln -s `pwd`/.bashrc ~/.bashrc
 # ------------------------
 # Dev. Env. Virtualization
 # ------------------------
+sudo apt-get install -y vagrant
 if [ "$(which docker)" == "" ]; then
 	curl -sSL https://get.docker.com/ | sh
 	sudo usermod -aG docker $USER
 	sudo pip install docker-compose
+	sudo gem install dev_dock
+fi
+
+if [ -z "$(which dev_dock)" ]; then
+	sudo gem install dev_dock
 fi
 
 # --------
