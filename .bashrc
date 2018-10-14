@@ -31,3 +31,11 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 alias node=nodejs
 export TF_VAR_do_token="$DO_TOKEN"
+export DO_API_TOKEN="$DO_TOKEN"
+
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
+export MINIKUBE_HOME=$HOME
+export CHANGE_MINIKUBE_NONE_USER=true
+
+#source <(kubectl completion bash)

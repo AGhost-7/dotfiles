@@ -3,17 +3,10 @@
 h=/home/aghost-7
 
 create-container() {
-	dev_dock start aghost7/$1:$2
 }
 
 run-dev() {
-	name=$1
-	tag=$2
-	xhost +si:localuser:$USER > /dev/null
-	if [ ! -f ~/.gitconfig ]; then
-		touch ~/.gitconfig
-	fi
-	create-container "$@"
+	slipway start aghost7/$1:$2
 }
 
 run-db() {
@@ -25,17 +18,20 @@ run-db() {
 }
 
 case "$1" in
+	c)
+		run-dev c-dev latest
+		;;
 	ruby)
 		run-dev ruby-dev latest
 		;;
 	py)
-		run-dev py-dev 3.5
+		run-dev py-dev bionic
 		;;
 	rust)
 		run-dev rust-dev nightly
 		;;
 	node)
-		run-dev nodejs-dev carbon
+		run-dev nodejs-dev bionic-carbon
 		;;
 	scala)
 		run-dev scala-dev latest

@@ -78,11 +78,7 @@ if [ "$(which docker)" == "" ]; then
 	curl -sSL https://get.docker.com/ | sh
 	sudo usermod -aG docker $USER
 	sudo pip install docker-compose
-	sudo gem install dev_dock
-fi
-
-if [ -z "$(which dev_dock)" ]; then
-	sudo gem install dev_dock
+	python3 -m pip install slipway
 fi
 
 # --------
@@ -164,10 +160,12 @@ fi
 # Gaming
 # ------
 
-# Install corefonts from debian directly due to bug in Ubuntu package.
-curl -o /tmp/ttf.deb http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
-sudo dpkg -i /tmp/ttf.deb
-sudo apt-get install steam -y
+if [ -z "$(which steam)" ]; then
+	# Install corefonts from debian directly due to bug in Ubuntu package.
+	curl -o /tmp/ttf.deb http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+	sudo dpkg -i /tmp/ttf.deb
+	sudo apt-get install steam -y
+fi
 
 # -----------
 # GUI Clients
