@@ -2,9 +2,6 @@
 
 h=/home/aghost-7
 
-create-container() {
-}
-
 run-dev() {
 	slipway start aghost7/$1:$2
 }
@@ -19,7 +16,7 @@ run-db() {
 
 case "$1" in
 	c)
-		run-dev c-dev latest
+		run-dev c-dev bionic
 		;;
 	ruby)
 		run-dev ruby-dev latest
