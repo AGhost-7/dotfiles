@@ -53,6 +53,9 @@ Plug 'tpope/vim-fugitive'
 " Github integration
 Plug 'tpope/vim-rhubarb'
 
+" Git history browser
+Plug 'junegunn/gv.vim'
+
 call plug#end()
 
 " Tab shizzle
