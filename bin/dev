@@ -3,7 +3,7 @@
 h=/home/aghost-7
 
 run-dev() {
-	slipway start aghost7/$1:$2
+	slipway start -e GH_TOKEN -e GH_PASS -e GH_USER --pull aghost7/$1:$2
 }
 
 run-db() {
@@ -15,6 +15,9 @@ run-db() {
 }
 
 case "$1" in
+	devops)
+		run-dev devops bionic
+		;;
 	c)
 		run-dev c-dev bionic
 		;;
@@ -28,7 +31,10 @@ case "$1" in
 		run-dev rust-dev nightly
 		;;
 	node)
-		run-dev nodejs-dev bionic-carbon
+		run-dev nodejs-dev bionic-dubnium
+		;;
+	java)
+		run-dev java-dev bionic
 		;;
 	scala)
 		run-dev scala-dev latest
