@@ -96,6 +96,8 @@ command Bd bp|bd #
 " Buffer delete all others (delete all except current one)
 command Bdo BufOnly
 
+abbreviate bdo Bdo
+
 " Send to system clipboard by default
 set clipboard=unnamedplus
 
