@@ -85,17 +85,10 @@ fi
 # Terminal
 # --------
 if [ "$(which alacritty)" == "" ]; then
-	git clone https://github.com/jwilm/alacritty.git ~/workspaces/alacritty
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
-	sudo apt-get install cmake libfreetype6-dev libfontconfig1-dev xclip -y
-	(cd ~/workspaces/alacritty; cargo build --release)
-	sudo cp ~/workspaces/alacritty/target/release/alacritty /usr/local/bin/alacritty
+	sudo apt-get install -y alacritty
 fi
 if [ ! -f ~/.config/alacritty.yml ]; then
-	ln -s $PWD/alacritty/alacritty.yml ~/.config/alacritty.yml
-fi
-if [ ! -f ~/.local/share/applications/Alacritty.desktop ]; then
-	cp ~/workspaces/alacritty/Alacritty.desktop ~/.local/share/applications
+	ln -s $PWD/alacritty/linux.yml ~/.config/alacritty.yml
 fi
 
 # ----
