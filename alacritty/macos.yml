@@ -533,6 +533,12 @@ key_bindings:
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
   - { key: N,        mods: Command, command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }
+  - { key: A,        mods: Alt,     chars: "\x1ba"                           }
+  - { key: F,        mods: Alt,     chars: "\x1bf"                           }
+  - { key: B,        mods: Alt,     chars: "\x1bb"                           }
+  - { key: T,        mods: Alt,     chars: "\x1bt"                           }
+  - { key: R,        mods: Alt,     chars: "\x1br"                           }
+  - { key: D,        mods: Alt,     chars: "\x1bd"                           }
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
   - { key: L,        mods: Control, action: ClearLogNotice                   }
