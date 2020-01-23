@@ -22,22 +22,19 @@ case "$1" in
 		run-dev c-dev bionic
 		;;
 	ruby)
-		run-dev ruby-dev latest
+		run-dev ruby-dev bionic
 		;;
 	py)
 		run-dev py-dev bionic
 		;;
 	rust)
-		run-dev rust-dev nightly
+		run-dev rust-dev bionic-nightly
 		;;
 	node)
 		run-dev nodejs-dev bionic-dubnium
 		;;
 	java)
 		run-dev java-dev bionic
-		;;
-	scala)
-		run-dev scala-dev latest
 		;;
 	go)
 		run-dev go-dev 1.6
