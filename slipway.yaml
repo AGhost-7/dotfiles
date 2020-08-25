@@ -5,6 +5,15 @@ alias:
   py: aghost7/py-dev:bionic
   rust: aghost7/rust-dev:bionic-stable
   java: aghost7/java-dev:bionic
-  devops: aghost7/devops:bionic
+  devops:
+    image: aghost7/devops:focal
+    network: slirp4netns
+    environment:
+      - DIGITALOCEAN_TOKEN
+      - DO_API_TOKEN
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_DEFAULT_REGION
 pull: true
 pull_daily: true
+runtime: podman
