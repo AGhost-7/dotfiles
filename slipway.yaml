@@ -1,8 +1,8 @@
 alias:
-  node: aghost7/nodejs-dev:bionic-dubnium
+  node: aghost7/nodejs-dev:focal-erbium
   ruby: aghost7/ruby-dev:bionic
   c: aghost7/c-dev:bionic
-  py: aghost7/py-dev:bionic
+  py: aghost7/py-dev:focal
   rust: aghost7/rust-dev:bionic-stable
   java: aghost7/java-dev:bionic
   devops:
