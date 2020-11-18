@@ -36,3 +36,13 @@ export MINIKUBE_HOME=$HOME
 export CHANGE_MINIKUBE_NONE_USER=true
 
 export PATH="$PATH:$HOME/bin"
+
+if [ -f ~/.poetry/env ]; then
+	. ~/.poetry/env
+fi
+
+alias slipway='cd ~/workspace/slipway && poetry run slipway'
+
+if [ -S /run/user/$UID/docker.sock ]; then
+	export DOCKER_HOST=unix:///run/user/$UID/docker.sock
+fi
