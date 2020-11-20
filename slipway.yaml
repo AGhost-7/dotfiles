@@ -1,7 +1,7 @@
 alias:
   node: aghost7/nodejs-dev:focal-erbium
   ruby: aghost7/ruby-dev:focal
-  c: aghost7/c-dev:bionic
+  c: aghost7/c-dev:focal
   py: aghost7/py-dev:focal
   rust: aghost7/rust-dev:focal-stable
   java: aghost7/java-dev:bionic
