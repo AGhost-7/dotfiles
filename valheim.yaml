@@ -7,28 +7,50 @@
       set_fact:
         valheim_installation: "{{ ansible_env.HOME }}/.steam/steam/steamapps/common/Valheim"
 
-    - name: get BepInEx package location
-      register: bepinex
-      uri:
-        url: https://valheim.thunderstore.io/api/experimental/package/denikson/BepInExPack_Valheim/
-        body: json
-        return_content: True
+        #- name: get BepInEx package location
+        #  register: bepinex
+        #  uri:
+        #    url: https://valheim.thunderstore.io/api/experimental/package/denikson/BepInExPack_Valheim/
+        #    body: json
+        #    return_content: True
 
-    - name: download bepinex
+        #- name: download bepinex
+        #  get_url:
+        #    url: "{{ bepinex.json.latest.download_url }}"
+        #    dest: /tmp/bepinex.zip
+
+        #- name: extract
+        #  unarchive:
+        #    src: /tmp/bepinex.zip
+        #    dest: /tmp
+        #    remote_src: True
+
+        #- name: copy into valheim installation
+        #  copy:
+        #    src: /tmp/BepInExPack_Valheim/
+        #    dest: "{{ valheim_installation }}"
+
+        #- name: get valheim plus location
+        #  register: valheim_plus
+        #  uri:
+        #    url: https://valheim.thunderstore.io/api/experimental/package/ValheimPlus/ValheimPlus/
+        #    body: json
+        #    return_content: True
+
+    - name: download valheim plus
       get_url:
-        url: "{{ bepinex.json.latest.download_url }}"
-        dest: /tmp/bepinex.zip
+        url: "https://github.com/valheimPlus/ValheimPlus/releases/download/0.9.8.2/UnixServer.zip"
+        dest: /tmp/valheim_plus.zip
 
-    - name: extract
+    - name: extract zip
       unarchive:
-        src: /tmp/bepinex.zip
-        dest: /tmp
-        remote_src: True
-
-    - name: copy into valheim installation
-      copy:
-        src: /tmp/BepInExPack_Valheim/
+        src: /tmp/valheim_plus.zip
         dest: "{{ valheim_installation }}"
+
+        #- name: copy plugin
+        #  copy:
+        #    src: /tmp/BepInEx/plugins/
+        #    dest: "{{ valheim_installation }}/BepInEx/plugins"
 
     # see: https://www.reddit.com/r/linux_gaming/comments/m0j6f3/you_can_easily_mod_valheim_on_linux_with_bepinex/
     - name: fix scripts
@@ -39,23 +61,3 @@
         path: "{{ valheim_installation }}/start_game_bepinex.sh"
         mode: "+x"
 
-    - name: get valheim plus location
-      register: valheim_plus
-      uri:
-        url: https://valheim.thunderstore.io/api/experimental/package/ValheimPlus/ValheimPlus/
-        body: json
-        return_content: True
-
-    - name: download valheim plus
-      get_url:
-        url: "{{ valheim_plus.json.latest.download_url }}"
-        dest: /tmp/valheim_plus.zip
-    - name: extract zip
-      unarchive:
-        src: /tmp/valheim_plus.zip
-        dest: /tmp
-
-    - name: copy plugin
-      copy:
-        src: /tmp/BepInEx/plugins/
-        dest: "{{ valheim_installation }}/BepInEx/plugins"
