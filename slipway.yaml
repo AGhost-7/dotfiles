@@ -3,7 +3,10 @@ alias:
   ruby: docker.io/aghost7/ruby-dev:focal
   c: docker.io/aghost7/c-dev:focal
   py: docker.io/aghost7/py-dev:focal
-  rust: docker.io/aghost7/rust-dev:focal-stable
+  rust:
+    image: docker.io/aghost7/rust-dev:focal-stable
+    device:
+      - /dev/bus/usb
   java: docker.io/aghost7/java-dev:bionic
   devops:
     image: docker.io/aghost7/devops:focal
