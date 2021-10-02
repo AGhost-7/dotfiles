@@ -39,7 +39,7 @@
 
     - name: download valheim plus
       get_url:
-        url: "https://github.com/valheimPlus/ValheimPlus/releases/download/0.9.8.2/UnixServer.zip"
+        url: "https://github.com/valheimPlus/ValheimPlus/releases/download/0.9.9/UnixServer.zip"
         dest: /tmp/valheim_plus.zip
 
     - name: extract zip
