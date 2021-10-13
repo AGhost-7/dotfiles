@@ -74,7 +74,9 @@ SCRIPT
 	command docker-compose $@
 }
 
-if [ -S /run/user/$UID/podman/podman.sock ]; then
+if [ -S /run/user/$UID/docker.sock ]; then
+	export DOCKER_HOST=unix:///run/user/$UID/docker.sock
+elif [ -S /run/user/$UID/podman/podman.sock ]; then
 	export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 	export COMPOSE_DOCKER_CLI_BUILD=0
 	alias docker-compose='_compose_shim'
