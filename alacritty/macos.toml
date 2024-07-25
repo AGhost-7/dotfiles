@@ -1,0 +1,7 @@
+import = [
+	"~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+]
+
+[font]
+normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+size = 11.0
