@@ -60,13 +60,8 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim",
-        config = function()
-            local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-            vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-            vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-            vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-        end,
+        branch = '0.1.x',
+        dependencies = {"nvim-lua/plenary.nvim"},
     },
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -79,8 +74,17 @@ require("lazy").setup({
 require('lualine').setup({
     options = { theme = "gruvbox" }
 })
-require('bufferline').setup({})
+require('bufferline').setup({
+  options = {
+    numbers = "buffer_id"
+  }
+})
 require("nvim-tree").setup({})
 
 vim.cmd('abbreviate t NvimTreeOpen')
 --vim.api.nvim_create_user_command('T', 'echo "It works!"', {})
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
