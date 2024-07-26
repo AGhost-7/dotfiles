@@ -22,10 +22,13 @@ vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.clipboard = "unnamedplus"
+vim.opt.termguicolors = true
 
+vim.g.slime_target = "tmux"
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- skip certain file types
+vim.g.EditorConfig_exclude_patterns = {"fugitive://.*", "scp://.*"}
 
 -- {{{ configure plugins
 require("lazy").setup({
@@ -58,11 +61,31 @@ require("lazy").setup({
         "nvim-tree/nvim-tree.lua",
         dependencies = "nvim-tree/nvim-web-devicons",
     },
+    -- file finder and much more
     {
         "nvim-telescope/telescope.nvim",
         branch = '0.1.x',
         dependencies = {"nvim-lua/plenary.nvim"},
     },
+    -- partial file diffs
+    {"AndrewRadev/linediff.vim"},
+    -- terminal integration
+    {"jpalardy/vim-slime"},
+    -- project-specific editor configuration
+    {"editorconfig/editorconfig-vim"},
+    -- Adds the ability to close all except the current buffer
+    {"vim-scripts/BufOnly.vim"},
+    -- Allows you to run git commands from vim
+    {"tpope/vim-fugitive"},
+    -- Github integration for fugitive
+    {"tpope/vim-rhubarb"},
+    -- browse file history
+    {"junegunn/gv.vim"},
+    -- git integration
+    {
+        "NeogitOrg/neogit",
+        dependencies = {"nvim-telescope/telescope.nvim"},
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -80,11 +103,16 @@ require('bufferline').setup({
   }
 })
 require("nvim-tree").setup({})
+require("neogit").setup({})
 
 vim.cmd('abbreviate t NvimTreeOpen')
---vim.api.nvim_create_user_command('T', 'echo "It works!"', {})
+vim.cmd('abbreviate bdo BufOnly')
+vim.cmd('abbreviate ldiffthis Linediff')
+vim.cmd('abbreviate ldiffoff LinediffReset')
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>ft', builtin.builtin, {})
