@@ -25,6 +25,14 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 
+local os = require('os')
+if os.getenv("TMUX") then
+  vim.g.slime_default_config = {
+    target_pane = ":.1",
+    socket_name = "0"
+  }
+end
+vim.g.slime_no_mappings = true
 vim.g.slime_target = "tmux"
 
 -- skip certain file types
@@ -82,15 +90,10 @@ require("lazy").setup({
     -- browse file history
     {"junegunn/gv.vim"},
     -- git integration
-    {
-        "NeogitOrg/neogit",
-        dependencies = {"nvim-telescope/telescope.nvim"},
-    }
+    {'tpope/vim-fugitive'},
+    -- Github integration for fugitive
+    {'tpope/vim-rhubarb'},
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  -- install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
   checker = { enabled = true },
 })
 --- }}}
@@ -103,7 +106,6 @@ require('bufferline').setup({
   }
 })
 require("nvim-tree").setup({})
-require("neogit").setup({})
 
 vim.cmd('abbreviate t NvimTreeOpen')
 vim.cmd('abbreviate bdo BufOnly')
@@ -116,3 +118,6 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>ft', builtin.builtin, {})
+
+vim.keymap.set('n', '<c-s>', '<Plug>SlimeLineSend', {})
+vim.keymap.set('x', '<c-s>', '<Plug>SlimeRegionSend', {})
