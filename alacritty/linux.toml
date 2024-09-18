@@ -4,3 +4,4 @@ import = [
 
 [font]
 normal = { family = "Ubuntu Mono" }
+#normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
