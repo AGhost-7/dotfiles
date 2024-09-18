@@ -25,6 +25,14 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 
+local os = require('os')
+if os.getenv("TMUX") then
+  vim.g.slime_default_config = {
+    target_pane = ":.1",
+    socket_name = "0"
+  }
+end
+vim.g.slime_no_mappings = true
 vim.g.slime_target = "tmux"
 
 -- skip certain file types
@@ -82,15 +90,16 @@ require("lazy").setup({
     -- browse file history
     {"junegunn/gv.vim"},
     -- git integration
-    {
-        "NeogitOrg/neogit",
-        dependencies = {"nvim-telescope/telescope.nvim"},
-    }
+    {'tpope/vim-fugitive'},
+    -- Github integration for fugitive
+    {'tpope/vim-rhubarb'},
+    -- autocomplete and stuff
+    {"neovim/nvim-lspconfig"},
+    -- lsp installer
+    {"williamboman/mason.nvim"},
+    -- mason integration with lspconfig
+    {"williamboman/mason-lspconfig.nvim"}
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  -- install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
   checker = { enabled = true },
 })
 --- }}}
@@ -103,7 +112,46 @@ require('bufferline').setup({
   }
 })
 require("nvim-tree").setup({})
-require("neogit").setup({})
+require("mason").setup({})
+require("mason-lspconfig").setup({
+  ensure_installed = { "lua_ls" },
+})
+
+local lspconfig = require('lspconfig')
+
+lspconfig.pyright.setup({})
+
+lspconfig.lua_ls.setup({
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT'
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths here.
+          -- "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+})
 
 vim.cmd('abbreviate t NvimTreeOpen')
 vim.cmd('abbreviate bdo BufOnly')
@@ -111,8 +159,17 @@ vim.cmd('abbreviate ldiffthis Linediff')
 vim.cmd('abbreviate ldiffoff LinediffReset')
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>ft', builtin.builtin, {})
+local map = vim.keymap.set
+
+map('n', '<leader>ff', builtin.find_files, {})
+map('n', '<leader>fg', builtin.live_grep, {})
+map('n', '<leader>fb', builtin.buffers, {})
+map('n', '<leader>fh', builtin.help_tags, {})
+map('n', '<leader>ft', builtin.builtin, {})
+
+map('n', '<c-s>', '<Plug>SlimeLineSend', {})
+map('x', '<c-s>', '<Plug>SlimeRegionSend', {})
+
+map('n', 'gd', vim.lsp.buf.definition, {})
+map('n', 'gD', vim.lsp.buf.references, {})
+map('n', 'K', vim.lsp.buf.hover, {})
