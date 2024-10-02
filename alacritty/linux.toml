@@ -5,3 +5,7 @@ import = [
 [font]
 normal = { family = "Ubuntu Mono" }
 #normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Control"
