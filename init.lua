@@ -128,7 +128,7 @@ lspconfig.jedi_language_server.setup({
       local result = async.run_command({'poetry', 'env', 'info', '-p'})
 
       if result then
-        init_params.initializationOptions.workspace.environmentPath = table.concat(result, '') .. 'bin/python'
+        init_params.initializationOptions.workspace.environmentPath = table.concat(result, '') .. '/bin/python'
       end
     end
   end,
