@@ -114,12 +114,25 @@ require('bufferline').setup({
 require("nvim-tree").setup({})
 require("mason").setup({})
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls" },
+  ensure_installed = { "lua_ls", "jedi_language_server" },
 })
 
 local lspconfig = require('lspconfig')
+local async = require('lspconfig.async')
+local uv = vim.uv or vim.loop
 
-lspconfig.pyright.setup({})
+lspconfig.jedi_language_server.setup({
+  before_init = function(init_params, config)
+    local stat = uv.fs_stat("pyproject.toml")
+    if stat and stat.type == 'file' then
+      local result = async.run_command({'poetry', 'env', 'info', '-p'})
+
+      if result then
+        init_params.initializationOptions.workspace.environmentPath = table.concat(result, '') .. 'bin/python'
+      end
+    end
+  end,
+})
 
 lspconfig.lua_ls.setup({
   on_init = function(client)
