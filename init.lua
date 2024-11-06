@@ -118,17 +118,36 @@ require("mason-lspconfig").setup({
 })
 
 local lspconfig = require('lspconfig')
-local async = require('lspconfig.async')
-local uv = vim.uv or vim.loop
 
 lspconfig.jedi_language_server.setup({
-  before_init = function(init_params, config)
-    local stat = uv.fs_stat("pyproject.toml")
+  before_init = function(init_params, _)
+    local stat = vim.uv.fs_stat("./pyproject.toml")
     if stat and stat.type == 'file' then
-      local result = async.run_command({'poetry', 'env', 'info', '-p'})
+      local co = coroutine.running()
+      local stdout = {}
+      local stderr = {}
+      local exit_code = 0
+      local jobid = vim.fn.jobstart({"poetry", "env", "info", "-p"}, {
+        on_stdout = function(_, chunk, _)
+          table.insert(stdout, table.concat(chunk))
+        end,
+        on_stderr = function(_, chunk, _)
+          table.insert(stderr, table.concat(chunk))
+        end,
+        on_exit = function(_, code, _)
+          exit_code = code
+          coroutine.resume(co)
+        end,
+      })
+      assert(jobid)
 
-      if result then
-        init_params.initializationOptions.workspace.environmentPath = table.concat(result, '') .. '/bin/python'
+      coroutine.yield()
+      if exit_code > 0 then
+        vim.notify(table.concat(stderr, ''))
+      else
+        init_params.initializationOptions.workspace = {
+          environmentPath = table.concat(stdout, '') .. '/bin/python',
+        }
       end
     end
   end,
