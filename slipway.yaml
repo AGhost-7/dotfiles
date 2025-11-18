@@ -2,14 +2,14 @@ alias:
   node: docker.io/aghost7/nodejs-dev:focal-erbium
   ruby: docker.io/aghost7/ruby-dev:focal
   c: docker.io/aghost7/c-dev:focal
-  py: docker.io/aghost7/py-dev:focal
+  py: docker.io/aghost7/py-dev:noble
   rust:
-    image: docker.io/aghost7/rust-dev:focal-stable
+    image: docker.io/aghost7/rust-dev:noble
     device:
       - /dev/bus/usb
-  java: docker.io/aghost7/java-dev:bionic
+  java: docker.io/aghost7/java-dev:noble
   devops:
-    image: docker.io/aghost7/devops:focal
+    image: docker.io/aghost7/devops:noble
     network: slirp4netns
     environment:
       - DIGITALOCEAN_TOKEN
