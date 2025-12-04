@@ -3,8 +3,8 @@ import = [
 ]
 
 [font]
-normal = { family = "Ubuntu Mono" }
-#normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+normal = { family = "FiraCode Nerd Font Mono" }
+
 [[keyboard.bindings]]
 action = "CreateNewWindow"
 key = "N"
