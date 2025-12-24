@@ -93,16 +93,6 @@ require("lazy").setup({
     {'tpope/vim-fugitive'},
     -- Github integration for fugitive
     {'tpope/vim-rhubarb'},
-    -- autocomplete and stuff
-    {"neovim/nvim-lspconfig"},
-    -- lsp installer
-    {"williamboman/mason.nvim"},
-    -- mason integration with lspconfig
-    {"williamboman/mason-lspconfig.nvim"},
-    -- autocomplete
-    {"hrsh7th/nvim-cmp"},
-    -- autocomplete source for lsp
-    {"hrsh7th/cmp-nvim-lsp"},
   },
   checker = { enabled = true },
 })
@@ -116,111 +106,6 @@ require('bufferline').setup({
   }
 })
 require("nvim-tree").setup({})
-require("mason").setup({})
-require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "jedi_language_server" },
-})
-
-local cmp = require("cmp")
-
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
-cmp.setup({
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-  }),
-  mapping = {
-
-    ['<C-Space>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    },
-
-    ['<Tab>'] = function(fallback)
-      if not cmp.select_next_item() then
-        if vim.bo.buftype ~= 'prompt' and has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end
-    end,
-
-    ['<S-Tab>'] = function(fallback)
-      if not cmp.select_prev_item() then
-        if vim.bo.buftype ~= 'prompt' and has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end
-    end,
-  },
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local lspconfig = require('lspconfig')
-
-lspconfig.jedi_language_server.setup({
-  before_init = function(init_params, _)
-    local stat = vim.uv.fs_stat("./pyproject.toml")
-    if stat and stat.type == 'file' then
-      local co = coroutine.running()
-      local stdout = {}
-      local stderr = {}
-      local exit_code = 0
-      local jobid = vim.fn.jobstart({"poetry", "env", "info", "-p"}, {
-        on_stdout = function(_, chunk, _)
-          table.insert(stdout, table.concat(chunk))
-        end,
-        on_stderr = function(_, chunk, _)
-          table.insert(stderr, table.concat(chunk))
-        end,
-        on_exit = function(_, code, _)
-          exit_code = code
-          coroutine.resume(co)
-        end,
-      })
-      assert(jobid)
-
-      coroutine.yield()
-      if exit_code > 0 then
-        vim.notify(table.concat(stderr, ''))
-      else
-        init_params.initializationOptions.workspace = {
-          environmentPath = table.concat(stdout, '') .. '/bin/python',
-        }
-      end
-    end
-  end,
-  capabilities = capabilities
-})
-
-lspconfig.lua_ls.setup({
-  on_init = function(client)
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        -- (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT'
-      },
-      -- Make the server aware of Neovim runtime files
-      workspace = {
-        checkThirdParty = false,
-        library = vim.api.nvim_get_runtime_file("", true)
-      }
-    })
-  end,
-  settings = {
-    Lua = {}
-  },
-  capabilities = capabilities
-})
 
 
 vim.cmd('abbreviate t NvimTreeOpen')

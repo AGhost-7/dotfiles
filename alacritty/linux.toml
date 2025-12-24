@@ -4,7 +4,6 @@ import = [
 
 [font]
 normal = { family = "FiraCode Nerd Font Mono" }
-
 [[keyboard.bindings]]
 action = "CreateNewWindow"
 key = "N"
