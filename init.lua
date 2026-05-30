@@ -43,8 +43,9 @@ require("lazy").setup({
   spec = {
     -- color theme
     {
-        "morhetz/gruvbox",
+        "ellisonleao/gruvbox.nvim",
         config = function()
+            vim.o.background = "dark"
             vim.cmd([[colorscheme gruvbox]])
         end,
         priority = 1000,
@@ -97,10 +98,10 @@ require("lazy").setup({
   checker = {
     enabled = true,
     -- check every 30 days
-    frequency = 3600 * 24 * 30
+    frequency = 3600 * 24 * 30,
   },
 })
---- }}}
+-- }}}
 require('lualine').setup({
     options = { theme = "gruvbox" }
 })
