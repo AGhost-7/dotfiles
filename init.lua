@@ -94,7 +94,11 @@ require("lazy").setup({
     -- Github integration for fugitive
     {'tpope/vim-rhubarb'},
   },
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    -- check every 30 days
+    frequency = 3600 * 24 * 30
+  },
 })
 --- }}}
 require('lualine').setup({
